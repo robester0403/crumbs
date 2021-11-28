@@ -14,6 +14,8 @@ const UserHomePage = () => {
   const [viewport, setViewport] = useState({
     latitude: 39.0111458605,
     longitude: -76.9110575000,
+    width: "80vw",
+    height: "60vh",
     zoom: 10
   });
   const [selectedStation, setSelectedStation] = useState(null);
@@ -23,13 +25,12 @@ const UserHomePage = () => {
       <main className="userHomePage">
       <Header/>
 
-        <section className="userHomePage__map-ctnr" id="map">
+        <section className="userHomePage__map-ctnr">
           <ReactMapGL
           onViewportChange={(newView) => setViewport(newView)}
           mapboxApiAccessToken={"pk.eyJ1Ijoicm9iZXN0ZXIwNDAzIiwiYSI6ImNrd2loN204ZTE4OGMyc280OHUxNzRpa3EifQ.m2pjCyZdJVLQmPEgO1EJ9w"}
           {...viewport}
           mapStyle="mapbox://styles/robester0403/ckwiiyulp1tc914kz01i19hh3"
-          container="map"
           >
             {stationData.features.map((station) => (
               <Marker key={station.properties.address}

@@ -1,0 +1,132 @@
+{
+    "businesses": [
+    {
+        "id": "Nq0UHjD_cKW9UbIJplQf_g",
+        "alias": "pow-wow-cafe-toronto",
+        "name": "Pow Wow Cafe",
+        "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/BPWxfIy4Y2Hu9v07n2YLHQ/o.jpg",
+        "is_closed": false,
+        "url": "https://www.yelp.com/biz/pow-wow-cafe-toronto?adjust_creative=2f09u__v2zYW3xenDTCbsQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=2f09u__v2zYW3xenDTCbsQ",
+        "review_count": 139,
+        "categories": [
+        {
+            "alias": "newcanadian",
+            "title": "Canadian (New)"
+        },
+        {
+            "alias": "cafes",
+            "title": "Cafes"
+        }
+        ],
+        "rating": 4.5,
+        "coordinates": {
+        "latitude": 43.65412,
+        "longitude": -79.40151
+        },
+        "transactions": [],
+        "price": "$$",
+        "location": {
+        "address1": "213 Augusta Avenue",
+        "address2": "",
+        "address3": null,
+        "city": "Toronto",
+        "zip_code": "M5T 2L4",
+        "country": "CA",
+        "state": "ON",
+        "display_address": [
+            "213 Augusta Avenue",
+            "Toronto, ON M5T 2L4",
+            "Canada"
+        ]
+        },
+        "phone": "+14165517717",
+        "display_phone": "+1 416-551-7717",
+        "distance": 2268.4019798538015
+    },
+    {
+        "id": "U-a61zpbsDNVtKm9W1aqLw",
+        "alias": "jimmys-coffee-toronto-5",
+        "name": "Jimmy's Coffee",
+        "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/kQm4vvHcZdlj7JKEKtWX7g/o.jpg",
+        "is_closed": false,
+        "url": "https://www.yelp.com/biz/jimmys-coffee-toronto-5?adjust_creative=2f09u__v2zYW3xenDTCbsQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=2f09u__v2zYW3xenDTCbsQ",
+        "review_count": 140,
+        "categories": [
+        {
+            "alias": "coffee",
+            "title": "Coffee & Tea"
+        }
+        ],
+        "rating": 4.0,
+        "coordinates": {
+        "latitude": 43.65845826670497,
+        "longitude": -79.385555
+        },
+        "transactions": [],
+        "price": "$",
+        "location": {
+        "address1": "84 Gerrard Street W",
+        "address2": "",
+        "address3": "",
+        "city": "Toronto",
+        "zip_code": "M5G",
+        "country": "CA",
+        "state": "ON",
+        "display_address": ["84 Gerrard Street W", "Toronto, ON M5G", "Canada"]
+        },
+        "phone": "+14167921141",
+        "display_phone": "+1 416-792-1141",
+        "distance": 1979.1212781296451
+    },
+    {
+        "id": "ocLnCE2E29j-CoBQj1yaSA",
+        "alias": "cafe-landwer-toronto",
+        "name": "Cafe Landwer",
+        "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/c32JGrsXAdZxJHmRbPf-pg/o.jpg",
+        "is_closed": false,
+        "url": "https://www.yelp.com/biz/cafe-landwer-toronto?adjust_creative=2f09u__v2zYW3xenDTCbsQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=2f09u__v2zYW3xenDTCbsQ",
+        "review_count": 355,
+        "categories": [
+        {
+            "alias": "cafes",
+            "title": "Cafes"
+        },
+        {
+            "alias": "breakfast_brunch",
+            "title": "Breakfast & Brunch"
+        }
+        ],
+        "rating": 4.0,
+        "coordinates": {
+        "latitude": 43.64875,
+        "longitude": -79.38491
+        },
+        "transactions": ["restaurant_reservation"],
+        "price": "$$",
+        "location": {
+        "address1": "165 University Avenue",
+        "address2": "",
+        "address3": null,
+        "city": "Toronto",
+        "zip_code": "M5H 3B8",
+        "country": "CA",
+        "state": "ON",
+        "display_address": [
+            "165 University Avenue",
+            "Toronto, ON M5H 3B8",
+            "Canada"
+        ]
+        },
+        "phone": "+16477481165",
+        "display_phone": "+1 647-748-1165",
+        "distance": 2991.54751638756
+    }
+    ],
+    "total": 8,
+    "region": {
+    "center": {
+        "longitude": -79.39682006835938,
+        "latitude": 43.67428196976998
+    }
+    }
+    }

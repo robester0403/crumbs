@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const fs = require("fs");
+const fs = require("fs");
 // Middleware
 router.use(express.json());
 // Config
@@ -14,6 +14,9 @@ port = process.env.port;
 //     .post()
 //     etc
 router.route("/").get((req, res) => {
-
-  return res.json(console.log("connected"));
+  let restaurantsArr = fs.readFileSync("./data/vloggerdata.json");
+  restaurantsArr = JSON.parse(restaurantsArr);
+  return res.json(restaurantsArr);
 });
+
+module.exports = router;
