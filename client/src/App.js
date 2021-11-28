@@ -15,7 +15,7 @@ const App = () => {
           <Route exact path="/" element={<FrontPage/>} />
 
           {/* Stage 1: route to default map & list of reviews from foodiemamaStage 2: route to a user's specific account */}
-          <Route path="/userhome/" component={UserHomePage} />
+          <Route path="/userhome/" element={<UserHomePage/>} />
           
         </Routes>
       </main>
