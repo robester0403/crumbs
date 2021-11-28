@@ -8,3 +8,17 @@
   width: 1.25rem;
   height: 1.25rem;
 }
+
+.userHomePage {
+  display: flex;
+  flex-direction: column;
+  
+  &__map-ctnr{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+#map {
+  width: 6rem;
+}
