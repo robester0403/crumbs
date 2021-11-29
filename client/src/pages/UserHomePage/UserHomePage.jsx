@@ -5,13 +5,11 @@ import React, { useState, useEffect } from "react";
 import ReactMapGL, {Marker, Popup} from "react-map-gl";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.JPG";
-import icon from "../../assets/images/station-icon.png";
+import icon from "../../assets/images/food-icon.png";
 import axios from 'axios';
 
 
 const UserHomePage = () => {
-
-  
 
   const [restaurantsArr, setRestaurantsArr] = useState(0);
 
@@ -24,7 +22,7 @@ const UserHomePage = () => {
   });
 
   const onLoad = () => {
-    axios.get(`http://localhost:8080/api/users/`)
+    axios.get(`http://localhost:8080/api/v1/users/`)
     .then(res => {
       setRestaurantsArr(res.data)
     })
@@ -78,11 +76,15 @@ const UserHomePage = () => {
               longitude={selectedRestaurant.coordinates.longitude}
               onClose={() => {setSelectedRestaurant(null)}}>
                 <div>
-                  This is working
+                  {selectedRestaurant.name}
+                </div>
+                <div>
+                  <img className="popup-img" src={selectedRestaurant.image_url} />
                 </div>
               </Popup>
             ): null}
           </ReactMapGL>
+
         </section>
         <div>
         What comes after
