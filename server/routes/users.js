@@ -16,7 +16,7 @@ port = process.env.port;
 router.route("/").get((req, res) => {
   let restaurantsArr = fs.readFileSync("./data/vloggerdata.json");
   restaurantsArr = JSON.parse(restaurantsArr);
-  return res.json(restaurantsArr);
+  return res.json(restaurantsArr.businesses);
 });
 
 module.exports = router;
