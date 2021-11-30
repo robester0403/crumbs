@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const userRoutes = require("./routes/users");
-const mongoRoutes = require("./routes/record");
 const dbo = require("./db/conn");
 const bp = require("body-parser");
 
@@ -17,7 +16,6 @@ require("dotenv").config();
 const port = process.env.PORT || 8080;
 
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/mongotest", mongoRoutes);
 app.use("*", (req,res) => res.status(404).json({error: "Not Found"}))
 
 app.listen(port, () => {
