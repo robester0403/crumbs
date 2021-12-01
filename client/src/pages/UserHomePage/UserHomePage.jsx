@@ -3,7 +3,6 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import React, { useState, useEffect } from "react";
 import ReactMapGL, {Marker, Popup} from "react-map-gl";
-import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.JPG";
 import icon from "../../assets/images/food-icon.png";
 import axios from 'axios';
@@ -22,7 +21,8 @@ const UserHomePage = () => {
   });
   
   const onLoad = () => {
-    axios.get(`http://localhost:8080/api/v1/users/`)
+    // redo this link
+    axios.get(`http://localhost:5000/api/v1/users/`)
     .then(res => {
       setRestaurantsArr(res.data)
     })

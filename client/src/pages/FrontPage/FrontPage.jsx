@@ -7,8 +7,6 @@ const FrontPage = () => {
 
   return (
     <>
-
-      
     {/* display column here in the container background image being phone */}
       <section className="frontphone__wrap">
         <img className="frontphone__logo" src={logo} alt="Crumbs company logo"/>
@@ -21,11 +19,22 @@ const FrontPage = () => {
         <div>
           <img className="frontphone__image" src={frontpageimage1} alt="Map with a vlogger highlighted to the marker" />
         </div>
-        <Link to={`/userhome/`}>
+        <Link to={`/userhome`}>
           <h3 className="frontphone__button">
             Get Started
           </h3>
         </Link>
+        <Link to={`/login`}>
+          <h3 className="frontphone__button">
+            Blogger Login
+          </h3>
+        </Link>
+        <Link to={`/signup`}>
+          <h3 className="frontphone__button">
+            Join Us!
+          </h3>
+        </Link>
+
       </section>
 
     </>

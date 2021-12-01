@@ -1,29 +1,29 @@
-const express = require("express");
-const { check } = require('express-validator');
+// const express = require("express");
+// const { check } = require('express-validator');
 
 
-const router = express.Router();
-const fs = require("fs");
-// Middleware
-router.use(express.json());
-// Config
-require("dotenv").config();
-port = process.env.port;
-const dbo = require("../db/conn");
-const ObjectId = require("mongodb").ObjectId;
+// const router = express.Router();
+// const fs = require("fs");
+// // Middleware
+// router.use(express.json());
+// // Config
+// require("dotenv").config();
+// port = process.env.port;
+// const dbo = require("../db/conn");
+// const ObjectId = require("mongodb").ObjectId;
 
-router.route("/").get((req, res) => {
-  let db_connect = dbo.getDb('test_yelpjson');
-  db_connect
-    .collection('test_locations')
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
-});
+// router.route("/").get((req, res) => {
+//   let db_connect = dbo.getDb('test_yelpjson');
+//   db_connect
+//     .collection('test_locations')
+//     .find({})
+//     .toArray(function (err, result) {
+//       if (err) throw err;
+//       res.json(result);
+//     });
+// });
 
-module.exports = router;
+// module.exports = router;
 
 // const express = require("express");
 // // recordRoutes is an instance of the express router.

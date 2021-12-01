@@ -2,19 +2,21 @@ import axios from 'axios';
 import React from 'react'
 import {Link} from 'react-router-dom';
 import Input from '../../components/Input/Input'
+import './SignUp.scss';
 
-function SignUp(props) {
+const SignUp = (props) => {
+
     const handleSignUp = (e) => {
         e.preventDefault();
         console.log({
             name: e.target.name.value,
-            username: e.target.username.value,
+            email: e.target.email.value,
             password: e.target.password.value
         })
 
-        axios.post('http://localhost:8080/users/register', {
+        axios.post('http://localhost:5000/api/users/signup', {
             name: e.target.name.value,
-            username: e.target.username.value,
+            email: e.target.email.value,
             password: e.target.password.value
         })
         .then(res => {
@@ -28,7 +30,7 @@ function SignUp(props) {
             <h1>Sign Up</h1>
             <form onSubmit={handleSignUp}>
                 <Input label="Name" name="name" type="text" />
-                <Input label="Username" name="username" type="text" />
+                <Input label="Username" name="email" type="text" />
                 <Input label="Password" name="password" type="password" />
 
                 <button type="submit">Sign Up!</button>
@@ -38,4 +40,4 @@ function SignUp(props) {
     )
 }
 
-export default SignUp
+export default SignUp;
