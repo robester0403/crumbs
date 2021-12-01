@@ -1,18 +1,7 @@
-// const express = require("express");
-// const userRoutes = express.Router();
-// const dbo = require("../db/conn");
-// // Ask TA about this next line
-// const ObjectId = require("mongodb").ObjectId;
-
-// // userRoutes.route("/").get(function (req, res) {
-// //   let db_connect = dbo.getDb()
-// //   restaurantsArr = JSON.parse(restaurantsArr);
-// //   return res.json(restaurantsArr.businesses);
-// // });
-
-// module.exports = userRoutes;
-
 const express = require("express");
+const { check } = require('express-validator');
+
+
 const router = express.Router();
 const fs = require("fs");
 // Middleware

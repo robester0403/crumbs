@@ -1,29 +1,48 @@
-const express = require("express");
-const cors = require("cors");
+const fs = require('fs');
+const path = require('path');
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+// const placesRoutes = require('./routes/places-routes');
+const usersRoutes = require('./routes/users-routes');
+const HttpError = require('./models/http-error');
+
 const app = express();
-const userRoutes = require("./routes/users");
-const dbo = require("./db/conn");
-const bp = require("body-parser");
 
-// Middleware
-app.use(cors());
-app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(bodyParser.json());
 
-// Config
-require("dotenv").config();
-const port = process.env.PORT || 8080;
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
-app.use("/api/v1/users", userRoutes);
-app.use("*", (req,res) => res.status(404).json({error: "Not Found"}))
+// app.use('/api/places', placesRoutes);
+app.use('/api/users', usersRoutes);
 
-app.listen(port, () => {
-  dbo.connectToServer(function (err) {
-    if (err) console.error(err);
+// app.use((req, res, next) => {
+//   const error = new HttpError('Could not find this route.', 404);
+//   throw error;
+// });
 
-  });
-  console.log(`Server is running on PORT ${port}`);
+app.use((error, req, res, next) => {
+  if (req.file) {
+    fs.unlink(req.file.path, err => {
+      console.log(err);
+    });
+  }
+  if (res.headerSent) {
+    return next(error);
+  }
+  res.status(error.code || 500);
+  res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-// export default app
+mongoose
+  .connect(
+    `mongodb+srv://crumbs:crumbs@crumbscluster.oesgi.mongodb.net/crumbdatabase?retryWrites=true&w=majority`
+  )
+  .then(() => {
+    app.listen(5000);
+  })
+  .catch(err => {
+    console.log(err);
+  });
