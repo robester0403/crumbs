@@ -36,9 +36,12 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
+require("dotenv").config();
+const port = process.env.PORT || 5000;
+
 mongoose
   .connect(
-    `mongodb+srv://crumbs:crumbs@crumbscluster.oesgi.mongodb.net/crumbdatabase?retryWrites=true&w=majority`
+    process.env.ATLAS_URI
   )
   .then(() => {
     app.listen(5000);
