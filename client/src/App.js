@@ -2,10 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import './App.css';
 import FrontPage from "./pages/FrontPage/FrontPage"
 import UserHomePage from "./pages/UserHomePage/UserHomePage"
-import Login from "./pages/Login/Login"
+import LogIn from "./pages/LogIn/LogIn"
 import SignUp from "./pages/SignUp/SignUp"
-import BloggerDashboard from "./pages/BloggerDashboard/BloggerDashboard"
-// import UserHomePage from "./pages/UserHomePage/UserHomePage"
+import BloggerDashboard from "./protectedpages/BloggerDashboard/BloggerDashboard"
+import BloggerUpload from "./protectedpages/BloggerUpload/BloggerUpload"
+
 
 document.title = "Crumbs: blogger mapper experience";
 
@@ -17,9 +18,11 @@ const App = () => {
           {/* Landing page route */}
           <Route path="/" element={<FrontPage/>} />
           <Route path="/userhome" element={<UserHomePage/>} />
-          <Route path="/login" element={<Login/>} />
+          <Route path="/login" element={<LogIn/>} />
           <Route path="/signup" element={<SignUp/>} />
+          {/* private route component?? */}
           <Route path="/login/blogger/" element={<BloggerDashboard/>} />
+          <Route path="/login/blogger/Upload" element={<BloggerUpload/>} />
         </Routes>
       </main>
     </>

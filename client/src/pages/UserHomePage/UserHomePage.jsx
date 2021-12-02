@@ -3,7 +3,6 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import React, { useState, useEffect } from "react";
 import ReactMapGL, {Marker, Popup} from "react-map-gl";
-import logo from "../../assets/images/logo.JPG";
 import icon from "../../assets/images/food-icon.png";
 import axios from 'axios';
 

@@ -1,7 +1,5 @@
 import axios from 'axios';
-import React from 'react'
 import {Link} from 'react-router-dom';
-import Input from '../../components/Input/Input'
 import './SignUp.scss';
 
 const SignUp = (props) => {
@@ -29,10 +27,12 @@ const SignUp = (props) => {
         <div className="">
             <h1>Sign Up</h1>
             <form onSubmit={handleSignUp}>
-                <Input label="Name" name="name" type="text" />
-                <Input label="Username" name="email" type="text" />
-                <Input label="Password" name="password" type="password" />
-
+                    <label for="name">Username</label>
+                    <input type="text" name="name" placeholder="Enter your name"></input>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" placeholder="Enter your Email Login"></input>
+                    <label for="password">Password</label>
+                    <input type="text" name="password" placeholder=""></input>
                 <button type="submit">Sign Up!</button>
             </form>
             <Link to="/login">Log In</Link>

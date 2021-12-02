@@ -1,6 +1,6 @@
 const express = require('express');
 const { check } = require('express-validator');
-
+const checkAuth = require('../middleware/check-auth');
 const usersController = require('../controllers/users-controllers');
 
 const router = express.Router();
@@ -28,5 +28,9 @@ router.post(
 
 // works now make sure you use no caps
 router.post('/login', usersController.login);
+
+router.use(checkAuth);
+
+// router.get('/', usersController.getLoggedInUser);
 
 module.exports = router;

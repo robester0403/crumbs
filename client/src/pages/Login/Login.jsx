@@ -1,11 +1,15 @@
 import axios from 'axios';
-import React from 'react'
-import {Link} from 'react-router-dom';
-import Input from '../../components/Input/Input';
+import {Link, useNavigate} from 'react-router-dom';
+import BloggerDashboard from '../../protectedpages/BloggerDashboard/BloggerDashboard';
+import React, { useState } from "react";
 import './LogIn.scss';
 
 
 function LogIn(props) {
+    let token = sessionStorage.getItem('authToken')
+    let navigate=useNavigate();
+    
+    const [bloggerDetArr, setBloggerDetArr] = useState(null);
 
     const handleLogIn = (e) => {
         e.preventDefault();
@@ -23,22 +27,33 @@ function LogIn(props) {
         .then(res => {
             console.log(res)
             let token = res.data.token
+            console.log(token)
             sessionStorage.setItem('authToken', token)
-            props.history.push('/login/blogger/')
+            setBloggerDetArr(res.data)
+            console.log(bloggerDetArr)
+            // Check this push
+            // if (token) {
+            //     return navigate('/login/blogger/')}
         })
     }
 
+    if (!token && !bloggerDetArr){
     return (
         <div className="login">
             <h1>Log In</h1>
             <form onSubmit={handleLogIn}>
-                <Input label="Email" name="email" type="text" />
-                <Input label="Password" name="password" type="password" />
+                    <label for="email">Email</label>
+                    <input type="text" name="email" placeholder="Enter your Email Login"></input>
+                    <label for="password">Password</label>
+                    <input type="text" name="password" placeholder=""></input>
                 <button type="submit">Log In</button>
             </form>
             <Link to="/signup">Sign Up</Link>
         </div>
-    )
+    )} else {
+    return(<BloggerDashboard bloggerdata={bloggerDetArr} />)
+    // This may be more optimized to use less Axios and less resources
+    }
 }
 
 export default LogIn;
