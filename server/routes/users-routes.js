@@ -31,6 +31,6 @@ router.post('/login', usersController.login);
 
 router.use(checkAuth);
 
-// router.get('/', usersController.getLoggedInUser);
+router.get('/login/:influencerId', usersController.influencerDashBoardGetData);
 
 module.exports = router;

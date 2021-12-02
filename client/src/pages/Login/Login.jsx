@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
-import BloggerDashboard from '../../protectedpages/BloggerDashboard/BloggerDashboard';
+import BloggerDashboard from '../../protectedcomponents/BloggerDashboard/BloggerDashboard';
 import React, { useState } from "react";
 import './LogIn.scss';
 
@@ -31,13 +31,14 @@ function LogIn(props) {
             sessionStorage.setItem('authToken', token)
             setBloggerDetArr(res.data)
             console.log(bloggerDetArr)
-            // Check this push
-            // if (token) {
-            //     return navigate('/login/blogger/')}
+            console.log(res.data.influencerId)
+            if (token) {
+                // Pass id through here 
+                return navigate(`/login/blogger/${res.data.influencerId}`)}
         })
     }
 
-    if (!token && !bloggerDetArr){
+
     return (
         <div className="login">
             <h1>Log In</h1>
@@ -50,10 +51,8 @@ function LogIn(props) {
             </form>
             <Link to="/signup">Sign Up</Link>
         </div>
-    )} else {
-    return(<BloggerDashboard bloggerdata={bloggerDetArr} />)
+    )} 
     // This may be more optimized to use less Axios and less resources
-    }
-}
+
 
 export default LogIn;

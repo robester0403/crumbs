@@ -8,7 +8,7 @@ import axios from 'axios';
 
 
 const UserHomePage = () => {
-
+  
   const [restaurantsArr, setRestaurantsArr] = useState(0);
 
   const [viewport, setViewport] = useState({

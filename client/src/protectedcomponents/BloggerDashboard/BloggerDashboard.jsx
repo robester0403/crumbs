@@ -7,9 +7,12 @@ const BloggerDashboard = (props) => {
 
   let navigate=useNavigate();
   console.log(props)
+
+
   const onLoad = () => {
     let token = sessionStorage.getItem('authToken')
     console.log(token)
+    // run your axios.get influencers here
   }
 
   useEffect(() => {
@@ -17,7 +20,7 @@ const BloggerDashboard = (props) => {
     }
     , [])
 
-  // const onLoad()
+// we gonna use onload to get the collecton of userdata from the collection
 
   const handleLogOut = (e) => {
     e.preventDefault();
@@ -29,7 +32,7 @@ const BloggerDashboard = (props) => {
 
     return (
       <>
-      <button onClick={handleLogOut}></button>
+      <button onClick={handleLogOut}>Logout</button>
       </>
     )
 }

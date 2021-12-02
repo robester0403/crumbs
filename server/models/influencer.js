@@ -3,13 +3,12 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const influencerSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true, minlength: 6 },
   influencerId: { type: String, required: true }
 });
 
-userSchema.plugin(uniqueValidator);
+influencerSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Influencer', influencerSchema);
