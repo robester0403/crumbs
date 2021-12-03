@@ -9,10 +9,7 @@ const markerSchema = new Schema({
   bizId: { type: String, required: true },
   bizName: { type: String, required: true },
   imageUrl: { type: String, required: true },
-  display_Address: { type: String, required: true },
   address1: { type: String, required: true },
-  address2: { type: String },
-  address3: { type: String },
   city: { type: String, required: true },
   country: { type: String },
   state: { type: String, required: true },
@@ -23,4 +20,4 @@ const markerSchema = new Schema({
 
 markerSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('Marker', instanceSchema);
+module.exports = mongoose.model('Marker', markerSchema);

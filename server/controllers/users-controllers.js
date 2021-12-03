@@ -4,8 +4,9 @@ const jwt = require('jsonwebtoken');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 const Influencer = require('../models/influencer');
-const mongoose = require('mongoose')
-
+const mongoose = require('mongoose');
+const Marker = require('../models/marker');
+const Instance = require('../models/instance');
 
 
 
@@ -23,9 +24,6 @@ const getUsers = async (req, res, next) => {
   }
   res.json({ users: users.map(user => user.toObject({ getters: true })) });
 };
-
-
-
 
 
 
@@ -73,8 +71,7 @@ const signup = async (req, res, next) => {
   const createdUser = new User({
     name,
     email,
-    password: hashedPassword,
-    influencerId: generatedId
+    password: hashedPassword
   });
 
 createdUser._id
@@ -124,8 +121,6 @@ createdUser._id
     .status(201)
     .json({ userId: createdUser.id, email: createdUser.email, token: token });
 };
-
-
 
 
 
@@ -195,14 +190,14 @@ const login = async (req, res, next) => {
   });
 };
 
-
-const influencerDashBoardGetData = async (req, res, next) => {
+// this is not done yet complete saturday
+const influencerDBGetOwnInstances = async (req, res, next) => {
   let userId = req.params.userId;
   userId = mongoose.Types.ObjectId(userId)
   console.log(typeof(userId))
 
   try {
-    let influencerProfile = await Influencer.findOne({ userId: userId});
+    let influencerProfile = await Influencer.find({ userId: userId});
     if (!influencerProfile) {
       const error = new HttpError(
         'Could not find your profile.',
@@ -218,13 +213,158 @@ const influencerDashBoardGetData = async (req, res, next) => {
     );
     return next(error);
   }
-
-
-
 }
 
+const influencerDBAddMarker = async (req, res, next) => {
+  const errors = validationResult(req);
+  // stop here if errors in req
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError('Invalid inputs passed, please check your data.', 422)
+    );
+  }
+
+  const { 
+      bizId,
+      bizName,
+      imageUrl,
+      address1,
+      address2,
+      address3,
+      city,
+      country,
+      state,
+      phone,
+      latitude,
+      longitude
+  } = req.body;
+// if marker is not found {
+//   create marker
+// } 
+// let test = await Marker.findOne({ bizId: bizId })
+// if (!test)
+  // change this to an if statement so that if. An empyt object is true
+  let existingMarker;
+  try {
+    existingMarker = await Marker.findOne({ bizId: bizId });
+  } catch (err) {
+    const error = new HttpError(
+      'Add Marker failed.',
+      500
+    );
+    return next(error);
+  }
+// if marker exists
+  if (existingMarker) {
+    const error = new HttpError(
+      'Marker exists already, please add your instance instead.',
+      422
+    );
+    return next(error);
+  }
+
+  const createdMarker = new Marker({
+    bizId,
+    bizName,
+    imageUrl,
+    address1,
+    address2,
+    address3,
+    city,
+    country,
+    state,
+    phone,
+    latitude,
+    longitude
+  });
+
+  try {
+    await createdMarker.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Signing up failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+// this is just a object we send back to the front as confirmation. Don't know if we need it.
+  res.status(201).json({ marker: createdMarker });
+};
+
+
+const influencerDBAddInstance = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError('Invalid inputs passed, please check your data.', 422)
+    );
+  }
+
+  const { 
+    bizId,
+    bizName,
+    userId,
+    name,
+    address1,
+    city,
+    country,
+    state,
+    mediaLinkUrl,
+    mediaEmbed,
+    phone
+  } = req.body;
+
+  let existingInstance;
+  try {
+    existingInstance = await Instance.findOne({ bizId: bizId });
+  } catch (err) {
+    const error = new HttpError(
+      'Add Instance failed.',
+      500
+    );
+    return next(error);
+  }
+
+  if (existingInstance) {
+    const error = new HttpError(
+      'Instance exists already, please add your instance instead.',
+      422
+    );
+    return next(error);
+  }
+
+
+  const createdInstance = new Instance({
+    bizId,
+    bizName,
+    userId,
+    name,
+    address1,
+    city,
+    country,
+    state,
+    mediaLinkUrl,
+    mediaEmbed,
+    phone
+  });
+
+  try {
+    await createdInstance.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Signing up failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+// this is just a object we send back to the front as confirmation. Don't know if we need it.
+  res.status(201).json({ instance: createdInstance });
+};
 
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
-exports.influencerDashBoardGetData = influencerDashBoardGetData;
+exports.influencerDBGetOwnInstances = influencerDBGetOwnInstances;
+
+exports.influencerDBAddMarker = influencerDBAddMarker;
+exports.influencerDBAddInstance = influencerDBAddInstance;
