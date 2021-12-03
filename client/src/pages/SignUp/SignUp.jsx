@@ -1,9 +1,10 @@
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './SignUp.scss';
 
 const SignUp = (props) => {
-
+    let navigate=useNavigate();
+    
     const handleSignUp = (e) => {
         e.preventDefault();
         console.log({
@@ -19,7 +20,7 @@ const SignUp = (props) => {
         })
         .then(res => {
             console.log(res)
-            props.history.push('/login')
+            navigate(`/login`)
         })
     }
 

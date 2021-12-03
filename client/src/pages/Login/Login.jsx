@@ -31,10 +31,10 @@ function LogIn(props) {
             sessionStorage.setItem('authToken', token)
             setBloggerDetArr(res.data)
             console.log(bloggerDetArr)
-            console.log(res.data.influencerId)
+            console.log(res.data.userId)
             if (token) {
                 // Pass id through here 
-                return navigate(`/login/blogger/${res.data.influencerId}`)}
+                return navigate(`/login/blogger/${res.data.userId}`)}
         })
     }
 
@@ -52,6 +52,7 @@ function LogIn(props) {
             <Link to="/signup">Sign Up</Link>
         </div>
     )} 
+
     // This may be more optimized to use less Axios and less resources
 
 

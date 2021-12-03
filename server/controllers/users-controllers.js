@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 const Influencer = require('../models/influencer');
-
+const mongoose = require('mongoose')
 
 
 
@@ -80,7 +80,7 @@ const signup = async (req, res, next) => {
     influencerId: generatedId
   });
 
-
+createdUser._id
 // See if we can save
   try {
     await createdUser.save();
@@ -95,7 +95,7 @@ const signup = async (req, res, next) => {
   const createdInfluencer = new Influencer({
     name,
     email,
-    influencerId: generatedId
+    userId: createdUser._id
   });
 // See if we can save
   try {
@@ -194,18 +194,26 @@ const login = async (req, res, next) => {
   res.json({
     userId: existingUser.id,
     email: existingUser.email,
-    influencerId: existingUser.influencerId,
     token: token
   });
 };
 
 
 const influencerDashBoardGetData = async (req, res, next) => {
-  const influencerId = req.params.influencerId;
+  let userId = req.params.userId;
+  userId = mongoose.Types.ObjectId(userId)
+  console.log(typeof(userId))
 
-  let influencerProfile;
   try {
-    influencerProfile = await Influencer.findOne({ influencerId: influencerId});
+    let influencerProfile = await Influencer.findOne({ userId: userId});
+    if (!influencerProfile) {
+      const error = new HttpError(
+        'Could not find your profile.',
+        404
+      );
+      return next(error);
+    }
+    res.json({ influencerProfile: influencerProfile.toObject({ getters: true }) });
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not find the Influencer.',
@@ -214,14 +222,8 @@ const influencerDashBoardGetData = async (req, res, next) => {
     return next(error);
   }
 
-  if (!influencerProfile) {
-    const error = new HttpError(
-      'Could not find your profile.',
-      404
-    );
-    return next(error);
-  }
-  res.json({ influencerProfile: influencerProfile.toObject({ getters: true }) });
+
+
 }
 
 

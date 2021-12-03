@@ -1,26 +1,30 @@
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams } from 'react-router-dom';
 import './BloggerDashboard.scss';
 import React, { useState, useEffect } from "react";
 
 const BloggerDashboard = (props) => {
 
-  let navigate=useNavigate();
-  console.log(props)
+  let token = sessionStorage.getItem('authToken')
+  const navigate=useNavigate();
+  const [influencerProfileData, setInfluencerProfileData] = useState(null);
+  let { userId } = useParams();
+  // let [searchParams, setSearchParams] = useSearchParams();
 
 
   const onLoad = () => {
-    let token = sessionStorage.getItem('authToken')
+    axios.get(`http://localhost:5000/api/users/loggedin/${userId}`, {headers: { 'Authorization': `Bearer ${token}`}})
+    .then(res =>  
+      setInfluencerProfileData(res.data.influencerProfile)
+    )
+    console.log(influencerProfileData)
     console.log(token)
-    // run your axios.get influencers here
+    
   }
-
   useEffect(() => {
     onLoad();
     }
     , [])
-
-// we gonna use onload to get the collecton of userdata from the collection
 
   const handleLogOut = (e) => {
     e.preventDefault();
@@ -29,9 +33,10 @@ const BloggerDashboard = (props) => {
     navigate('/login')
   }
 
-
     return (
       <>
+      {/* Just need some async logic to load  */}
+      <div>Welcome</div>
       <button onClick={handleLogOut}>Logout</button>
       </>
     )
