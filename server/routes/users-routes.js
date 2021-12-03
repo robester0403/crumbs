@@ -5,13 +5,10 @@ const usersController = require('../controllers/users-controllers');
 
 const router = express.Router();
 
-// works now
 router.get('/', usersController.getUsers);
 
-// works now make sure you feed in json
 router.post(
   '/signup',
-
   [
     check('name')
       .not()
@@ -21,16 +18,16 @@ router.post(
       .isEmail(),
     check('password').isLength({ min: 6 })
   ],
-
   usersController.signup
 );
-
 
 // works now make sure you use no caps
 router.post('/login', usersController.login);
 
 router.use(checkAuth);
 
-router.get('/loggedin/:userId', usersController.influencerDashBoardGetData);
+// router.get('/loggedin/:userId', usersController.influencerDashBoardGetData);
+// do this route later might need a patch
+// router.post('/loggedin/:userId/userprofile', usersControllers.editOwnProfile);
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { v4: uuidv4 } = require("uuid");
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 const Influencer = require('../models/influencer');
@@ -70,8 +69,6 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-
-  let generatedId=uuidv4()
 // This is where it interacts with the model schema to create a new user database
   const createdUser = new User({
     name,

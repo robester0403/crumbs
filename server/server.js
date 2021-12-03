@@ -5,7 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-// const placesRoutes = require('./routes/places-routes');
+// const instanceMapRoutes = require('./routes/instance-map-routes');
 const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
 
@@ -26,7 +26,7 @@ app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 //   next();
 // });
 
-// app.use('/api/places', placesRoutes);
+// app.use('/api/instancemap', instanceMapRoutes);
 app.use('/api/users', usersRoutes);
 
 // app.use((req, res, next) => {

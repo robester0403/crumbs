@@ -1,22 +1,24 @@
+const { Double, Decimal128 } = require('bson');
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const Schema = mongoose.Schema;
 
+// issues with any of the URL string';
 const markerSchema = new Schema({
-  bizid: { type: String, required: true },
-  bizname: { type: String, required: true },
-  imageurl: { type: String, required: true },
-  display_address: { type: String, required: true },
-  address1: { type: String },
+  bizId: { type: String, required: true },
+  bizName: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  display_Address: { type: String, required: true },
+  address1: { type: String, required: true },
   address2: { type: String },
   address3: { type: String },
   city: { type: String, required: true },
   country: { type: String },
   state: { type: String, required: true },
   phone: { type: String, required: true },
-  latitude: { type: String, required: true },
-  longitude: { type: String, required: true }
+  latitude: { type: Decimal128, required: true },
+  longitude: { type: Decimal128, required: true }
 });
 
 markerSchema.plugin(uniqueValidator);

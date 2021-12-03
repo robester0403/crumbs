@@ -4,16 +4,16 @@ const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
 const instanceSchema = new Schema({
-  bizid: { type: String, required: true },
-  bizname: { type: String, required: true },
-  userid: { type: String, required: true },
-  username: { type: String, required: true },
-  display_address: { type: String, required: true },
+  bizId: { type: String, required: true },
+  bizName: { type: String, required: true },
+  userId: { type: String, required: true },
+  name: { type: String, required: true },
+  display_Address: { type: String, required: true },
   city: { type: String, required: true },
   country: { type: String },
   state: { type: String, required: true },
-  medialinkurl: { type: String, required: true },
-  mediaembed: { type: String },
+  mediaLinkUrl: { type: String, required: true },
+  mediaEmbed: { type: String },
   phone: { type: String }
 });
 
