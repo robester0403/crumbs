@@ -19,6 +19,7 @@ const FrontPage = () => {
         <div>
           <img className="frontphone__image" src={frontpageimage1} alt="Map with a vlogger highlighted to the marker" />
         </div>
+        <iframe width="800" height="315" src="https://www.youtube.com/embed/JaDBQNDJfF8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <Link to={`/userhome`}>
           <h3 className="frontphone__button">
             Get Started

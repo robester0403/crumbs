@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const influencerSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  userId: { type: String, required: true }
 });
 
 influencerSchema.plugin(uniqueValidator);
