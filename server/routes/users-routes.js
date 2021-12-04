@@ -31,8 +31,10 @@ router.get('/loggedin/:userId', usersController.influencerDBGetOwnInstances);
 // router.post('/loggedin/:userId/add', usersController.influencerAddInstance);
 
 // first we builder the marker add
-router.post('/loggedin/:userId/addmarker', usersController.influencerDBAddMarker);
-// then we build the instance
-router.post('/loggedin/:userId/addinstance', usersController.influencerDBAddInstance);
+// router.post('/loggedin/addmarker', usersController.influencerDBAddMarker);
+// // then we build the instance
+// router.post('/loggedin/:userId/addinstance', usersController.influencerDBAddInstance);
+router.post('/loggedin/:userId/addmarkinst', usersController.influencerDBAddMarkerInstance);
+// router.post('/loggedin/yelpsearch', usersController.influencerYelpSearch);
 
 module.exports = router;

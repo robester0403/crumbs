@@ -17,5 +17,54 @@ test jimmy coffee
 
 "61aa8ec8646b96c676ad826e"
 
+{
+  "bizId": "U-a61zpbsDNVtKm9W1aqLw",
+  "bizName": "Jimmy's Coffee",
+  "userId": "61ababad2ed65b378c146213",
+  "name": "Sarah Chan",
+  "address1": "84 Gerrard Street W",
+  "city": "Toronto",
+  "country": "CA",
+  "state": "ON",
+  "mediaLinkUrl": "https://youtu.be/0ELhQZUc7Lo?t=80",
+  "mediaEmbed": "",
+  "phone": "+14167921141",
+  "_id": "61abb2bad34aa958334ec70c",
+}
 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWFhOGVjODY0NmI5NmM2NzZhZDgyNmUiLCJlbWFpbCI6InJhd2NoaWNrZW5AZ21haWwuY29tIiwiaWF0IjoxNjM4NTY3NjU3LCJleHAiOjE2Mzg1NzEyNTd9.AUlQ5nUvL8ZMCFcXABqHmlTqOEyz42SL-La0Xhz9DRA
+{
+  "bizId": "U-a61zpbsDNVtKm9W1aqLw",
+  "bizName": "Jimmy's Coffee",
+  "userId": "61ababad2ed65b378c146213",
+  "name": "Sarah Chan",
+  "address1": "84 Gerrard Street W",
+  "city": "Toronto",
+  "country": "CA",
+  "state": "ON",
+  "mediaLinkUrl": "https://youtu.be/0ELhQZUc7Lo?t=80",
+  "mediaEmbed": "",
+  "phone": "+14167921141",
+  "_id": "61abb2bad34aa958334ec70c",
+}
+https://youtu.be/0ELhQZUc7Lo?t=180
+{ 
+  "bizId": "Nq0UHjD_cKW9UbIJplQf_g",
+  "bizName": "Pow Wow Cafe",
+  "imageUrl": "https://s3-media2.fl.yelpcdn.com/bphoto/BPWxfIy4Y2Hu9v07n2YLHQ/o.jpg",
+  "address1": "213 Augusta Avenue",
+  "address2": "",
+  "address3": "",
+  "city": "Toronto",
+  "country": "CA",
+  "state": "ON",
+  "phone": "+14165517717",
+  "latitude": 43.65845826670497,
+  "longitude": -79.385555,
+  "userId": "61ababad2ed65b378c146213",
+  "name": "Sarah Chan",
+  "mediaLinkUrl": "https://youtu.be/0ELhQZUc7Lo?t=80",
+  "mediaEmbed": "",
+}
+
+token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWFiYWJhZDJlZDY1YjM3OGMxNDYyMTMiLCJlbWFpbCI6InNhcmFoY2hhbkBnbWFpbC5jb20iLCJpYXQiOjE2Mzg2NDE0NTIsImV4cCI6MTYzODY0NTA1Mn0.ZsvTKl5q3MtbsSIlIYJ4B6W18Ap84h2vP-6t41N0vKE
