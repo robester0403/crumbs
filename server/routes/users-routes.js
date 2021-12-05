@@ -23,10 +23,10 @@ router.post(
 
 // works now make sure you use no caps
 router.post('/login', usersController.login);
-
+router.post('/loggedin/:userId/addmarkinst', usersController.influencerDBAddMarkerInstance);
 router.use(checkAuth);
 router.post('/loggedin/:userId/searchYelp', usersController.influencerSearchYelp)
 router.get('/loggedin/:userId', usersController.influencerDBGetOwnInstances);
-router.post('/loggedin/:userId/addmarkinst', usersController.influencerDBAddMarkerInstance);
+
 
 module.exports = router;

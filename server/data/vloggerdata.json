@@ -8,41 +8,44 @@
         "is_closed": false,
         "url": "https://www.yelp.com/biz/pow-wow-cafe-toronto?adjust_creative=2f09u__v2zYW3xenDTCbsQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=2f09u__v2zYW3xenDTCbsQ",
         "review_count": 139,
-        "categories": [
-            {
-                "alias": "newcanadian",
-                "title": "Canadian (New)"
-            },
-            {
-                "alias": "cafes",
-                "title": "Cafes"
-            }
-        ],
+                            "categories": [
+                                {
+                                    "alias": "newcanadian",
+                                    "title": "Canadian (New)"
+                                },
+                                {
+                                    "alias": "cafes",
+                                    "title": "Cafes"
+                                }
+                            ],
         "rating": 4.5,
-        "coordinates": {
-            "latitude": 43.65412,
-            "longitude": -79.40151
-            },
+                    "coordinates": {
+                        "latitude": 43.65412,
+                        "longitude": -79.40151
+                        },
         "transactions": [],
         "price": "$$",
-        "location": {
-        "address1": "213 Augusta Avenue",
-        "address2": "",
-        "address3": null,
-        "city": "Toronto",
-        "zip_code": "M5T 2L4",
-        "country": "CA",
-        "state": "ON",
-        "display_address": [
-            "213 Augusta Avenue",
-            "Toronto, ON M5T 2L4",
-            "Canada"
-        ]
-        },
+        "location": 
+                        {
+                        "address1": "213 Augusta Avenue",
+                        "address2": "",
+                        "address3": null,
+                        "city": "Toronto",
+                        "zip_code": "M5T 2L4",
+                        "country": "CA",
+                        "state": "ON",
+                                    "display_address": [
+                                        "213 Augusta Avenue",
+                                        "Toronto, ON M5T 2L4",
+                                        "Canada"
+                                    ]
+                        },
         "phone": "+14165517717",
         "display_phone": "+1 416-551-7717",
         "distance": 2268.4019798538015
     },
+
+
     {
         "id": "U-a61zpbsDNVtKm9W1aqLw",
         "alias": "jimmys-coffee-toronto-5",

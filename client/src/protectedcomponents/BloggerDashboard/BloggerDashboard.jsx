@@ -22,10 +22,10 @@ const BloggerDashboard = (props) => {
     console.log(token)
   }
 
-  const handleYelpSearch = (e) => {
+  const handleYelpSearch = async (e) => {
     e.preventDefault();
     console.log(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`);
-    axios.post(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`, 
+    await axios.post(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`, 
       {
         term: e.target.searchbizname.value,
         location: e.target.searchbizaddresscity.value
@@ -36,18 +36,19 @@ const BloggerDashboard = (props) => {
       }
     )
     .then(res =>  
-YelpSearchData(res.data.yelpresult.businesses[0])
+      setYelpSearchData(res.data)
     )
+    console.log(yelpSearchData)
   }
 
   const handleAddMarkerInstance = (e) => {
     e.preventDefault();
-    console.log(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`);
-    axios.post(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`, 
+    console.log(`http://localhost:5000/api/users/loggedin/${userId}/addmarkinst`);
+    axios.post(`http://localhost:5000/api/users/loggedin/${userId}/addmarkinst`, 
       {
         bizId: yelpSearchData.bizId,
         bizName: yelpSearchData.bizName,
-        imageUrl: yelpSearchData.imageurl,
+        imageUrl: yelpSearchData.imageUrl,
         address1: yelpSearchData.address1,
         address2: yelpSearchData.address2,
         address3: yelpSearchData.address3,
@@ -59,7 +60,11 @@ YelpSearchData(res.data.yelpresult.businesses[0])
         longitude: yelpSearchData.longitude,
         userId: influencerProfileData.userId,
         name: influencerProfileData.name,
-        mediaLinkUrl: e.target.medialink.value
+        mediaLinkUrl: e.target.medialink.value,
+        price: yelpSearchData.price,
+        rating: yelpSearchData.rating,
+        url: yelpSearchData.url,
+        reviewCount: yelpSearchData.review_count
       }
     ,
       {
@@ -100,13 +105,14 @@ YelpSearchData(res.data.yelpresult.businesses[0])
           <input type="text" name="searchbizaddresscity" placeholder="Enter your address or a city"></input>
         <button type="submit">Search Yelp</button>
       </form>
-
+      <br/>
+      <br/>
       <form onSubmit={handleAddMarkerInstance}>
           <label for="medialink">Media Link: Share with Time You Want to Start At</label>
           <input type="text" name="medialink" placeholder="Youtube link"></input>
           <label for="description">Description (Not Required Implemented Later)</label>
           <input type="text" name="description" placeholder="Enter whatever you would like to add"></input>
-        <button type="submit">Search Yelp</button>
+        <button type="submit">Add entry</button>
       </form>
       {/* mediaLinkUrl,
       mediaEmbed */}

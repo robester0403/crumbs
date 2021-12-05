@@ -236,39 +236,46 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
       userId,
       name,
       mediaLinkUrl,
-      mediaEmbed
+      mediaEmbed,
+      price,
+      rating,
+      url,
+      reviewCount,
   } = req.body;
 
-  // so somehing in this if statement is breaking the code
+  // this line tries to find
   let existingMarker = await Marker.findOne({ bizId: bizId });
+  const createdMarker = new Marker({
+    bizId,
+    bizName,
+    imageUrl,
+    address1,
+    address2,
+    address3,
+    city,
+    country,
+    state,
+    phone,
+    latitude,
+    longitude,
+    price,
+    rating,
+    url,
+    reviewCount,
+  });
+  console.log(createdMarker)
   if (!existingMarker) {
-    console.log('we are in the if')
-    const createdMarker = new Marker({
-      bizId,
-      bizName,
-      imageUrl,
-      address1,
-      address2,
-      address3,
-      city,
-      country,
-      state,
-      phone,
-      latitude,
-      longitude
-    });
     try {
-      await createdMarker.save();
+      createdMarker.save();
     } catch (err) {
-      // we are catching an error here and the main difference is the if statement
       const error = new HttpError(
-        'Create failed, please try again later.',
+        'Signing up failed, please try again later.',
         500
       );
       return next(error);
-    }    
+    }
     console.log(createdMarker)
-
+    console.log("we are in the catch")
   }
 
 // ===== code up to here is working
@@ -297,6 +304,8 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
       userId,
       name,
       address1,
+      address2,
+      address3,
       city,
       country,
       state,
@@ -338,22 +347,24 @@ const influencerSearchYelp = async (req, res, next) => {
       }
     )
     .then((response) => {
-      console.log(response.data)
-      // do here to separate the data before front end
+      console.log(response.data.businesses[0].image_url)
       res.send({
-        yelpresult: response.data,
         bizId: response.data.businesses[0].id,
         bizName: response.data.businesses[0].name,
         imageUrl: response.data.businesses[0].image_url,
-        address1: response.data.businesses[0].address1,
-        address2: response.data.businesses[0].address2,
-        address3: response.data.businesses[0].address3,
-        city: response.data.businesses[0].city,
-        country: response.data.businesses[0].country,
-        state: response.data.businesses[0].state,
+        address1: response.data.businesses[0].location.address1,
+        address2: response.data.businesses[0].location.address2,
+        address3: response.data.businesses[0].location.address3,
+        city: response.data.businesses[0].location.city,
+        country: response.data.businesses[0].location.country,
+        state: response.data.businesses[0].location.state,
         phone: response.data.businesses[0].display_phone,
         latitude: response.data.businesses[0].coordinates.latitude,
-        longitude: response.data.businesses[0].coordinates.longitude
+        longitude: response.data.businesses[0].coordinates.longitude,
+        price: response.data.businesses[0].price,
+        rating: response.data.businesses[0].rating,
+        url: response.data.businesses[0].url,
+        reviewCount: response.data.businesses[0].review_count
       })
     })
     .catch((err) => {
