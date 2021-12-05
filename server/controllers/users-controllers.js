@@ -218,8 +218,7 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
-  console.log(errors)
-  // console.log(req.body)
+  
   const { 
       bizId,
       bizName,

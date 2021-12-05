@@ -93,11 +93,23 @@ const BloggerDashboard = (props) => {
   } else {
     return (
       <>
-      {/* Just need some async logic to load  */}
-      <div>Welcome {influencerProfileData.name}</div>
+      
+      {/* header block for influencers. May make into header later */}
+      <section>
+        <h1>
+        Welcome {influencerProfileData.name}
+        </h1>
+        <h3>
+          Email: {influencerProfileData.email}
+        </h3>
+        <button onClick={handleLogOut}>
+          Logout
+        </button>
+      </section>
 
-      <button onClick={handleLogOut}>Logout</button>
+      {/* Body Section */}
 
+      <section>
       <form onSubmit={handleYelpSearch}>
           <label for="searchbizname">Business Name</label>
           <input type="text" name="searchbizname" placeholder="Enter the business name"></input>
@@ -114,18 +126,9 @@ const BloggerDashboard = (props) => {
           <input type="text" name="description" placeholder="Enter whatever you would like to add"></input>
         <button type="submit">Add entry</button>
       </form>
-      {/* mediaLinkUrl,
-      mediaEmbed */}
 
-            {/* <form onSubmit={handleSignUp}>
-                    <label for="name">Username</label>
-                    <input type="text" name="name" placeholder="Enter your name"></input>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" placeholder="Enter your Email Login"></input>
-                    <label for="password">Password</label>
-                    <input type="text" name="password" placeholder=""></input>
-                <button type="submit">Sign Up!</button>
-            </form>  */}
+      </section>
+
       </>
     )}
 }
