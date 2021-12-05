@@ -7,6 +7,7 @@ const Influencer = require('../models/influencer');
 const mongoose = require('mongoose');
 const Marker = require('../models/marker');
 const Instance = require('../models/instance');
+const axios = require('axios');
 
 // Login and sign up control
 const getUsers = async (req, res, next) => {
@@ -188,11 +189,10 @@ const login = async (req, res, next) => {
 // this is not done yet complete saturday
 const influencerDBGetOwnInstances = async (req, res, next) => {
   let userId = req.params.userId;
-  userId = mongoose.Types.ObjectId(userId)
-  console.log(typeof(userId))
+  console.log(userId)
 
   try {
-    let influencerProfile = await Influencer.find({ userId: userId});
+    let influencerProfile = await Influencer.findOne({ userId: userId});
     if (!influencerProfile) {
       const error = new HttpError(
         'Could not find your profile.',
@@ -323,31 +323,45 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
 const influencerSearchYelp = async (req, res, next) => {
   const { 
     term,
-    location,
-    locale
-} = req.body;
-
+    location
+  } = req.body;
+// there is something wrong with the url string
   const queryterm = `term=` + `${term}`
   const querylocation = `location=` + `${location}`
-  const querylocale = `locale=` + `${locale}`
-  console.log(querylocale)
-axios.get(
-  `https://api.yelp.com/v3/businesses/search?${queryterm}${querylocation}${querylocale}&limit=1`,
-    {
-      headers: 
-      { 'Authorization': 'Bearer ' + req.query.access_token }
-    }
-  )
-  .then((response) => {
-    console.log(response.data)
-    res.send( {yelpresult: response.data} )
-  })
-  .catch((err) => {
-    console.log('failed to grab user devices');
-    // res.send('err');
-  });
-  
-  // res.json(yelpdata);
+  // const querylocale = `locale=` + `${locale}`
+  // console.log(`https://api.yelp.com/v3/businesses/search?${queryterm}&${querylocation}&limit=1`)
+  await axios.get(
+    `https://api.yelp.com/v3/businesses/search?${queryterm}&${querylocation}&limit=1`,
+      {
+        headers: 
+        { 'Authorization': 'Bearer ' + process.env.YELP_URI }
+      }
+    )
+    .then((response) => {
+      console.log(response.data)
+      // do here to separate the data before front end
+      res.send({
+        yelpresult: response.data,
+        bizId: response.data.businesses[0].id,
+        bizName: response.data.businesses[0].name,
+        imageUrl: response.data.businesses[0].image_url,
+        address1: response.data.businesses[0].address1,
+        address2: response.data.businesses[0].address2,
+        address3: response.data.businesses[0].address3,
+        city: response.data.businesses[0].city,
+        country: response.data.businesses[0].country,
+        state: response.data.businesses[0].state,
+        phone: response.data.businesses[0].display_phone,
+        latitude: response.data.businesses[0].coordinates.latitude,
+        longitude: response.data.businesses[0].coordinates.longitude
+      })
+    })
+    .catch((err) => {
+      console.log('failed to grab user devices');
+      // res.send('err');
+    });
+    
+    // res.json(yelpdata);
 }
 
 exports.getUsers = getUsers;
@@ -355,14 +369,13 @@ exports.signup = signup;
 exports.login = login;
 exports.influencerDBGetOwnInstances = influencerDBGetOwnInstances;
 
-// exports.influencerDBAddMarker = influencerDBAddMarker;
-// exports.influencerDBAddInstance = influencerDBAddInstance;
+
 exports.influencerSearchYelp = influencerSearchYelp;
 exports.influencerDBAddMarkerInstance = influencerDBAddMarkerInstance;
 
 
-
-
+// exports.influencerDBAddMarker = influencerDBAddMarker;
+// exports.influencerDBAddInstance = influencerDBAddInstance;
 
 // const influencerDBAddMarker = async (req, res, next) => {
 //   const errors = validationResult(req);

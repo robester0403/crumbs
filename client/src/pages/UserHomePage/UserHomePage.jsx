@@ -10,7 +10,7 @@ import axios from 'axios';
 const UserHomePage = () => {
   
   const [restaurantsArr, setRestaurantsArr] = useState(0);
-
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 43.65845826670497,
     longitude: -79.385555,
@@ -18,6 +18,7 @@ const UserHomePage = () => {
     height: "60vh",
     zoom: 12
   });
+  
   
   const onLoad = () => {
     // redo this link
@@ -46,7 +47,7 @@ const UserHomePage = () => {
       }
       , [restaurantsArr])
 
-  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+
 
   return (
     <>
