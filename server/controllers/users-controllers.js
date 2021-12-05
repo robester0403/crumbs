@@ -8,8 +8,7 @@ const mongoose = require('mongoose');
 const Marker = require('../models/marker');
 const Instance = require('../models/instance');
 
-
-
+// Login and sign up control
 const getUsers = async (req, res, next) => {
   let users;
   try {
@@ -24,8 +23,6 @@ const getUsers = async (req, res, next) => {
   }
   res.json({ users: users.map(user => user.toObject({ getters: true })) });
 };
-
-
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -122,8 +119,6 @@ createdUser._id
     .json({ userId: createdUser.id, email: createdUser.email, token: token });
 };
 
-
-
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -214,154 +209,6 @@ const influencerDBGetOwnInstances = async (req, res, next) => {
     return next(error);
   }
 }
-
-const influencerDBAddMarker = async (req, res, next) => {
-  const errors = validationResult(req);
-  // stop here if errors in req
-  if (!errors.isEmpty()) {
-    return next(
-      new HttpError('Invalid inputs passed, please check your data.', 422)
-    );
-  }
-
-  const { 
-      bizId,
-      bizName,
-      imageUrl,
-      address1,
-      address2,
-      address3,
-      city,
-      country,
-      state,
-      phone,
-      latitude,
-      longitude
-  } = req.body;
-// if marker is not found {
-//   create marker
-// } 
-// let test = await Marker.findOne({ bizId: bizId })
-// if (!test)
-  // change this to an if statement so that if. An empyt object is true
-  let existingMarker;
-  try {
-    existingMarker = await Marker.findOne({ bizId: bizId });
-  } catch (err) {
-    const error = new HttpError(
-      'Add Marker failed.',
-      500
-    );
-    return next(error);
-  }
-// if marker exists
-  if (existingMarker) {
-    const error = new HttpError(
-      'Marker exists already, please add your instance instead.',
-      422
-    );
-    return next(error);
-  }
-
-  const createdMarker = new Marker({
-    bizId,
-    bizName,
-    imageUrl,
-    address1,
-    address2,
-    address3,
-    city,
-    country,
-    state,
-    phone,
-    latitude,
-    longitude
-  });
-
-  try {
-    await createdMarker.save();
-  } catch (err) {
-    const error = new HttpError(
-      'Signing up failed, please try again later.',
-      500
-    );
-    return next(error);
-  }
-// this is just a object we send back to the front as confirmation. Don't know if we need it.
-  res.status(201).json({ marker: createdMarker });
-};
-
-
-const influencerDBAddInstance = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return next(
-      new HttpError('Invalid inputs passed, please check your data.', 422)
-    );
-  }
-
-  const { 
-    bizId,
-    bizName,
-    userId,
-    name,
-    address1,
-    city,
-    country,
-    state,
-    mediaLinkUrl,
-    mediaEmbed,
-    phone
-  } = req.body;
-
-  let existingInstance;
-  try {
-    existingInstance = await Instance.findOne({ bizId: bizId });
-  } catch (err) {
-    const error = new HttpError(
-      'Add Instance failed.',
-      500
-    );
-    return next(error);
-  }
-
-  if (existingInstance) {
-    const error = new HttpError(
-      'Instance exists already, please add your instance instead.',
-      422
-    );
-    return next(error);
-  }
-
-
-  const createdInstance = new Instance({
-    bizId,
-    bizName,
-    userId,
-    name,
-    address1,
-    city,
-    country,
-    state,
-    mediaLinkUrl,
-    mediaEmbed,
-    phone
-  });
-
-  try {
-    await createdInstance.save();
-  } catch (err) {
-    const error = new HttpError(
-      'Signing up failed, please try again later.',
-      500
-    );
-    return next(error);
-  }
-// this is just a object we send back to the front as confirmation. Don't know if we need it.
-  res.status(201).json({ instance: createdInstance });
-};
-
-// ==========================================================
 
 const influencerDBAddMarkerInstance = async (req, res, next) => {
   const errors = validationResult(req);
@@ -471,14 +318,196 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
     res.status(201).json({ instance: createdInstance });
   }
 
+// remember to find limit 1 term is name. locale is the country
+// process.env.YELP_URI
+const influencerSearchYelp = async (req, res, next) => {
+  const { 
+    term,
+    location,
+    locale
+} = req.body;
+
+  const queryterm = `term=` + `${term}`
+  const querylocation = `location=` + `${location}`
+  const querylocale = `locale=` + `${locale}`
+  console.log(querylocale)
+axios.get(
+  `https://api.yelp.com/v3/businesses/search?${queryterm}${querylocation}${querylocale}&limit=1`,
+    {
+      headers: 
+      { 'Authorization': 'Bearer ' + req.query.access_token }
+    }
+  )
+  .then((response) => {
+    console.log(response.data)
+    res.send( {yelpresult: response.data} )
+  })
+  .catch((err) => {
+    console.log('failed to grab user devices');
+    // res.send('err');
+  });
+  
+  // res.json(yelpdata);
+}
+
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
 exports.influencerDBGetOwnInstances = influencerDBGetOwnInstances;
 
-exports.influencerDBAddMarker = influencerDBAddMarker;
-exports.influencerDBAddInstance = influencerDBAddInstance;
+// exports.influencerDBAddMarker = influencerDBAddMarker;
+// exports.influencerDBAddInstance = influencerDBAddInstance;
+exports.influencerSearchYelp = influencerSearchYelp;
 exports.influencerDBAddMarkerInstance = influencerDBAddMarkerInstance;
 
 
 
+
+
+// const influencerDBAddMarker = async (req, res, next) => {
+//   const errors = validationResult(req);
+//   // stop here if errors in req
+//   if (!errors.isEmpty()) {
+//     return next(
+//       new HttpError('Invalid inputs passed, please check your data.', 422)
+//     );
+//   }
+
+//   const { 
+//       bizId,
+//       bizName,
+//       imageUrl,
+//       address1,
+//       address2,
+//       address3,
+//       city,
+//       country,
+//       state,
+//       phone,
+//       latitude,
+//       longitude
+//   } = req.body;
+// // if marker is not found {
+// //   create marker
+// // } 
+// // let test = await Marker.findOne({ bizId: bizId })
+// // if (!test)
+//   // change this to an if statement so that if. An empyt object is true
+//   let existingMarker;
+//   try {
+//     existingMarker = await Marker.findOne({ bizId: bizId });
+//   } catch (err) {
+//     const error = new HttpError(
+//       'Add Marker failed.',
+//       500
+//     );
+//     return next(error);
+//   }
+// // if marker exists
+//   if (existingMarker) {
+//     const error = new HttpError(
+//       'Marker exists already, please add your instance instead.',
+//       422
+//     );
+//     return next(error);
+//   }
+
+//   const createdMarker = new Marker({
+//     bizId,
+//     bizName,
+//     imageUrl,
+//     address1,
+//     address2,
+//     address3,
+//     city,
+//     country,
+//     state,
+//     phone,
+//     latitude,
+//     longitude
+//   });
+
+//   try {
+//     await createdMarker.save();
+//   } catch (err) {
+//     const error = new HttpError(
+//       'Signing up failed, please try again later.',
+//       500
+//     );
+//     return next(error);
+//   }
+// // this is just a object we send back to the front as confirmation. Don't know if we need it.
+//   res.status(201).json({ marker: createdMarker });
+// };
+
+
+// const influencerDBAddInstance = async (req, res, next) => {
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty()) {
+//     return next(
+//       new HttpError('Invalid inputs passed, please check your data.', 422)
+//     );
+//   }
+
+//   const { 
+//     bizId,
+//     bizName,
+//     userId,
+//     name,
+//     address1,
+//     city,
+//     country,
+//     state,
+//     mediaLinkUrl,
+//     mediaEmbed,
+//     phone
+//   } = req.body;
+
+//   let existingInstance;
+//   try {
+//     existingInstance = await Instance.findOne({ bizId: bizId });
+//   } catch (err) {
+//     const error = new HttpError(
+//       'Add Instance failed.',
+//       500
+//     );
+//     return next(error);
+//   }
+
+//   if (existingInstance) {
+//     const error = new HttpError(
+//       'Instance exists already, please add your instance instead.',
+//       422
+//     );
+//     return next(error);
+//   }
+
+
+//   const createdInstance = new Instance({
+//     bizId,
+//     bizName,
+//     userId,
+//     name,
+//     address1,
+//     city,
+//     country,
+//     state,
+//     mediaLinkUrl,
+//     mediaEmbed,
+//     phone
+//   });
+
+//   try {
+//     await createdInstance.save();
+//   } catch (err) {
+//     const error = new HttpError(
+//       'Signing up failed, please try again later.',
+//       500
+//     );
+//     return next(error);
+//   }
+// // this is just a object we send back to the front as confirmation. Don't know if we need it.
+//   res.status(201).json({ instance: createdInstance });
+// };
+
+// // ==========================================================

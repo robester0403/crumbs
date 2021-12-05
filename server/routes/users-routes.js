@@ -36,5 +36,5 @@ router.get('/loggedin/:userId', usersController.influencerDBGetOwnInstances);
 // router.post('/loggedin/:userId/addinstance', usersController.influencerDBAddInstance);
 router.post('/loggedin/:userId/addmarkinst', usersController.influencerDBAddMarkerInstance);
 // router.post('/loggedin/yelpsearch', usersController.influencerYelpSearch);
-
+router.post('/loggedin/:userId/searchYelp', usersController.influencerSearchYelp)
 module.exports = router;
