@@ -11,10 +11,10 @@ const FrontPage = () => {
       <section className="frontphone__wrap">
         <img className="frontphone__logo" src={logo} alt="Crumbs company logo"/>
         <h1 className="frontphone__title">
-          Map Out Vlogger's Experiences
+          Follow CrumbTrails left by influencers
         </h1>
         <h3 className="frontphone__body-text">
-          Crumbs merges blogger content and maps. Watch, plan, and relive their experience!
+          Crumbs links viewers with influencer content and maps. Watch, plan, and relive their experience!
         </h3>
         <div>
           <img className="frontphone__image" src={frontpageimage1} alt="Map with a vlogger highlighted to the marker" />

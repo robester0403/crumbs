@@ -3,23 +3,20 @@ import {useNavigate, useParams } from 'react-router-dom';
 import './BloggerDashboard.scss';
 import React, { useState, useEffect } from "react";
 
-const BloggerDashboard = (props) => {
+const BloggerDashboard = () => {
 
   let token = sessionStorage.getItem('authToken')
   const navigate=useNavigate();
   const [influencerProfileData, setInfluencerProfileData] = useState(null);
   const [yelpSearchData, setYelpSearchData] = useState(null);
-// use params give you access to URL params on the http address
+// use params give you access to URL params on the http address. the params being the same in the URL
   let { userId } = useParams();
 
   const onLoad = async () => {
     await axios.get(`http://localhost:5000/api/users/loggedin/${userId}`, {headers: { 'Authorization': `Bearer ${token}`}})
     .then(res =>  
       setInfluencerProfileData(res.data.influencerProfile)
-      // console.log(res.data.influencerProfile)
     )
-    console.log(influencerProfileData)
-    console.log(token)
   }
 
   const handleYelpSearch = async (e) => {
@@ -31,9 +28,7 @@ const BloggerDashboard = (props) => {
         location: e.target.searchbizaddresscity.value
       }
     ,
-      {
-        headers: { 'Authorization': `Bearer ${token}`}
-      }
+      { headers: { 'Authorization': `Bearer ${token}`} }
     )
     .then(res =>  
       setYelpSearchData(res.data)
@@ -95,39 +90,105 @@ const BloggerDashboard = (props) => {
       <>
       
       {/* header block for influencers. May make into header later */}
-      <section>
-        <h1>
-        Welcome {influencerProfileData.name}
-        </h1>
-        <h3>
-          Email: {influencerProfileData.email}
-        </h3>
-        <button onClick={handleLogOut}>
-          Logout
-        </button>
-      </section>
+        <section>
+          <h1>
+          Welcome {influencerProfileData.name}
+          </h1>
+          <h3>
+            Email: {influencerProfileData.email}
+          </h3>
+          <button onClick={handleLogOut}>
+            Logout
+          </button>
+        </section>
 
       {/* Body Section */}
 
-      <section>
-      <form onSubmit={handleYelpSearch}>
-          <label for="searchbizname">Business Name</label>
-          <input type="text" name="searchbizname" placeholder="Enter the business name"></input>
-          <label for="searchbizaddresscity">Address or City</label>
-          <input type="text" name="searchbizaddresscity" placeholder="Enter your address or a city"></input>
-        <button type="submit">Search Yelp</button>
-      </form>
-      <br/>
-      <br/>
-      <form onSubmit={handleAddMarkerInstance}>
-          <label for="medialink">Media Link: Share with Time You Want to Start At</label>
-          <input type="text" name="medialink" placeholder="Youtube link"></input>
-          <label for="description">Description (Not Required Implemented Later)</label>
-          <input type="text" name="description" placeholder="Enter whatever you would like to add"></input>
-        <button type="submit">Add entry</button>
-      </form>
+        <main>
+          {/* Aside Menu navigation */}
+          <aside>
+            <div>
+              Post Content
+            </div>
+            <div>
+              Edit/Delete Content
+            </div>
+            <div>
+              Leaderboard
+            </div>
+            <div>
+              Influencer Forums
+            </div>
+            <div>
+              Settings
+            </div>
+          </aside>  
+          {/* should display flex from here */}
+          <section>
+            {/* Can be condensed into a Yelp Component */}
+            <article>
+              <h1>
+                Create a new CrumbTrail!
+              </h1>
+              <h3>
+                Step 1: Search Yelp For Your Store
+              </h3>
+              <h4>
+                If the exact store is not located, then try adding more information.
+              </h4>
+                <form onSubmit={handleYelpSearch}>
+                    <label for="searchbizname">Business Name</label>
+                    <input type="text" name="searchbizname" placeholder="Enter the business name"></input>
+                    <label for="searchbizaddresscity">Address or City</label>
+                    <input type="text" name="searchbizaddresscity" placeholder="Enter your address or a city"></input>
+                  <button type="submit">Search Yelp</button>
+                </form>
+                <div className="makeacardhere">
+                  {/* In the future add be the first to post here logic */}
+                  <h3>
+                    Yelp Search Results
+                  </h3>
+                  <h4>
+                    Location Name: {yelpSearchData.bizName}
+                  </h4>
+                  <h4>
+                    Address: {yelpSearchData.address1} {yelpSearchData.address2} {yelpSearchData.address3}
+                  </h4>
+                  <h4>
+                    City: {yelpSearchData.city}
+                  </h4>
+                  <h4>
+                    State or Province: {yelpSearchData.state}
+                  </h4>
+              </div>
+            </article>
 
-      </section>
+            
+
+            {/* Can be condensed into a MarkInst Component */}
+            <article>
+              <h1>
+                Step 2:Share Your Media
+              </h1>
+              <form onSubmit={handleAddMarkerInstance}>
+                  <label for="medialink">Media Link: Share with Time You Want to Start At</label>
+                  <input type="text" name="medialink" placeholder="Youtube link"></input>
+                  <label for="description">Description (Implemented Later)</label>
+                  <input type="text" name="description" placeholder=""></input>
+                <button type="submit">Create CrumbTrail</button>
+              </form>
+              <h4>
+                See below for a quick tutorial on how to share youtube links.
+              </h4>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/IzzNgzn2ppk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </article>
+          </section>
+
+        </main>
+        <main>
+          {/* Map out blogger instances here. */}
+
+        </main>
 
       </>
     )}
