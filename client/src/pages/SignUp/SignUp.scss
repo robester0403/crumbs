@@ -1,0 +1,56 @@
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
+
+body {
+  background-color: hsl(60, 11%, 95%);
+  color: $dark-text-color;
+}
+
+.signup {
+
+  &__ctnr {
+    margin: 15rem auto;
+    width: 26rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 2rem 1rem;
+  } 
+
+  &__header {
+    margin-bottom: 2rem;
+  }
+
+
+  &__form-ctnr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-bottom:0.25rem;
+    @include dt-bdy-copy-style
+  }
+
+  &__input {
+    width: 24rem;
+    padding: 0.4rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: none;
+  }
+
+  &__btn {
+    @include button;
+    border: none;
+    margin: 0 auto;
+    @include dt-bdy-copy-style
+  }
+
+  &__signup-text{
+    margin-top: 1rem;
+  }
+}

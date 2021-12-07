@@ -7,15 +7,23 @@ const BloggerDashboard = () => {
 
   let token = sessionStorage.getItem('authToken')
   const navigate=useNavigate();
+  const [influencerOwnInst, setInfluencerOwnInst] = useState(null);
   const [influencerProfileData, setInfluencerProfileData] = useState(null);
   const [yelpSearchData, setYelpSearchData] = useState(null);
 // use params give you access to URL params on the http address. the params being the same in the URL
   let { userId } = useParams();
 
-  const onLoad = async () => {
+  const onLoadProfile = async () => {
+    await axios.get(`http://localhost:5000/api/users/loggedin/${userId}/profile`, {headers: { 'Authorization': `Bearer ${token}`}})
+    .then(res =>  
+      setInfluencerProfileData(res.data.profileData)
+    )
+  }
+
+  const onLoadInstances = async () => {
     await axios.get(`http://localhost:5000/api/users/loggedin/${userId}`, {headers: { 'Authorization': `Bearer ${token}`}})
     .then(res =>  
-      setInfluencerProfileData(res.data.influencerProfile)
+      setInfluencerOwnInst(res.data.instances)
     )
   }
 
@@ -36,8 +44,11 @@ const BloggerDashboard = () => {
     console.log(yelpSearchData)
   }
 
+
   const handleAddMarkerInstance = (e) => {
     e.preventDefault();
+    let fixUrl = e.target.medialink.value.replace("youtu.be","www.youtube.com/embed");
+    let mediaLinkUrl = fixUrl + "?start=" + e.target.starttime.value
     console.log(`http://localhost:5000/api/users/loggedin/${userId}/addmarkinst`);
     axios.post(`http://localhost:5000/api/users/loggedin/${userId}/addmarkinst`, 
       {
@@ -55,7 +66,7 @@ const BloggerDashboard = () => {
         longitude: yelpSearchData.longitude,
         userId: influencerProfileData.userId,
         name: influencerProfileData.name,
-        mediaLinkUrl: e.target.medialink.value,
+        mediaLinkUrl: mediaLinkUrl,
         price: yelpSearchData.price,
         rating: yelpSearchData.rating,
         url: yelpSearchData.url,
@@ -72,7 +83,8 @@ const BloggerDashboard = () => {
   }
 
   useEffect(() => {
-    onLoad();
+    onLoadInstances();
+    onLoadProfile();
     }
     , [])
 
@@ -145,20 +157,21 @@ const BloggerDashboard = () => {
                 </form>
                 <div className="makeacardhere">
                   {/* In the future add be the first to post here logic */}
+                  {/* Maybe make entire section conditional */}
                   <h3>
                     Yelp Search Results
                   </h3>
                   <h4>
-                    Location Name: {yelpSearchData.bizName}
+                    Location Name: {yelpSearchData && yelpSearchData.bizName}
                   </h4>
                   <h4>
-                    Address: {yelpSearchData.address1} {yelpSearchData.address2} {yelpSearchData.address3}
+                    Address: {yelpSearchData && yelpSearchData.address1} {yelpSearchData && yelpSearchData.address2} {yelpSearchData && yelpSearchData.address3}
                   </h4>
                   <h4>
-                    City: {yelpSearchData.city}
+                    City: {yelpSearchData && yelpSearchData.city}
                   </h4>
                   <h4>
-                    State or Province: {yelpSearchData.state}
+                    State or Province: {yelpSearchData && yelpSearchData.state}
                   </h4>
               </div>
             </article>
@@ -173,14 +186,12 @@ const BloggerDashboard = () => {
               <form onSubmit={handleAddMarkerInstance}>
                   <label for="medialink">Media Link: Share with Time You Want to Start At</label>
                   <input type="text" name="medialink" placeholder="Youtube link"></input>
-                  <label for="description">Description (Implemented Later)</label>
-                  <input type="text" name="description" placeholder=""></input>
+                  <label for="starttime">Time to Start Vid In Seconds </label>
+                  <input type="text" name="starttime" placeholder="Enter An Integer"></input>
                 <button type="submit">Create CrumbTrail</button>
               </form>
               <h4>
-                See below for a quick tutorial on how to share youtube links.
               </h4>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/IzzNgzn2ppk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </article>
           </section>
 

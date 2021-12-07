@@ -25,18 +25,18 @@ const SignUp = (props) => {
     }
 
     return (
-        <div className="">
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSignUp}>
-                    <label for="name">Username</label>
-                    <input type="text" name="name" placeholder="Enter your name"></input>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" placeholder="Enter your Email Login"></input>
-                    <label for="password">Password</label>
-                    <input type="text" name="password" placeholder=""></input>
-                <button type="submit">Sign Up!</button>
+        <div className="signup__ctnr">
+            <h1 className="signup__header">Sign Up</h1>
+            <form onSubmit={handleSignUp} className="signup__form-ctnr">
+                    <label for="name" className="signup__label">Username</label>
+                    <input type="text" className="signup__input" name="name" placeholder="Enter your name"></input>
+                    <label for="email" className="signup__label">Email</label>
+                    <input type="text" className="signup__input" name="email" placeholder="Enter your Email Login"></input>
+                    <label for="password" className="signup__label">Password</label>
+                    <input type="text" className="signup__input" name="password" placeholder=""></input>
+                <button type="submit" className="signup__btn">Sign Up!</button>
             </form>
-            <Link to="/login">Log In</Link>
+            <Link to="/login" className="signup__signup-text">Log In</Link>
         </div>
     )
 }

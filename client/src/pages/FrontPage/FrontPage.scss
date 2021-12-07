@@ -1,36 +1,96 @@
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
 
-.frontphone {
+// add box shadow, active, drop animation, and images of food in bg
+
+body {
+  background-color: hsl(60, 11%, 95%);
+  color: $dark-text-color;
+}
+.front{
+
+  &__wrap {
+    max-width: 64rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.front-aside {
   
   &__wrap {
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 32rem;
+  }
+
+
+  &__title {
+    margin: 2rem 1rem;
+    text-align: center;
+    color: $red-text-color
+  }
+
+  &__body-text {
+    margin: 1rem 3rem;
+    text-align: center;
+  }
+
+  &__btn-ctnr {
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  &__title {
-    text-align: center;
+  &__button {
+    margin: 1rem 1rem;
+    @include button;
+  }
+}
+
+.front-phone {
+
+  &__wrap{
+  width: 32rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url(../../assets/images/phone-overlay2.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height:60rem;
+  }
+
+  &__screen-bg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $light-bg-color;
+    width: 24.81rem;
+    margin-left: 0.3rem;
   }
 
   &__logo {
-    width: 12.5rem;
-    margin: 1rem 0;
-  }
-
-  &__body-text {
-    width: 17.5rem;
-    text-align: center;
-    margin-top: 0;
+    padding-top: 2rem;
   }
 
   &__image {
-    object-fit: contain;
-    width:100%;
+    object-fit: cover;
+    width: 100%;
+    margin: 1rem 0 1rem 0rem;
   }
 
-  &__button {
-    border: solid 1px chocolate;
-    border-radius: 1rem;
-    padding: 1rem
+  &__youtube-image {
+    object-fit: cover;
+        width: 100%;
+        padding-bottom: 2rem;
   }
 }

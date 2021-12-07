@@ -40,16 +40,21 @@ function LogIn(props) {
 
 
     return (
-        <div className="login">
-            <h1>Log In</h1>
-            <form onSubmit={handleLogIn}>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" placeholder="Enter your Email Login"></input>
-                    <label for="password">Password</label>
-                    <input type="text" name="password" placeholder=""></input>
-                <button type="submit">Log In</button>
+        <div className="login__ctnr">
+            <h1 className="login__header">Log In</h1>
+            <form onSubmit={handleLogIn} className="login__form-ctnr">
+                    <label for="email" className="login__label">Email</label>
+                    <input type="text" name="email" placeholder="Enter your Email Login" className="login__input"></input>
+                    <label for="password" className="login__label">Password</label>
+                    <input type="text" name="password" placeholder="" className="login__input"></input>
+                <button type="submit" className="login__btn">Log In</button>
             </form>
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/signup" className="login__signup-text">
+                New to Crumbs? Join Now!
+            </Link>
+            <Link to="/" className="login__signup-text">
+                Back to front page
+            </Link>
         </div>
     )} 
 

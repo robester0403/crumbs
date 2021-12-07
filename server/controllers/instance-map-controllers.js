@@ -9,10 +9,10 @@ const mongoose = require('mongoose');
 
 // this is a get all for demo purposes
 const getAllInstances = async (req, res, next) => {
-  let instances;
+  let allInstances;
   try {
     // check why we need the option in documentation
-    instances = await Instance.find({});
+    allInstances = await Instance.find({});
   } catch (err) {
     const error = new HttpError(
       'Fetching users failed, please try again later.',
@@ -20,14 +20,14 @@ const getAllInstances = async (req, res, next) => {
     );
     return next(error);
   }
-  res.json({ instances: instances.map(instance => instance.toObject({ getters: true })) });
+  res.json({ instances: allInstances.map(instance => instance.toObject({ getters: true })) });
 };
 
 const getAllMapMarkers = async (req, res, next) => {
-  let markers;
+  let allMarkers;
   try {
     // check why we need the option in documentation
-    markers = await Marker.find({});
+    allMarkers = await Marker.find({});
   } catch (err) {
     const error = new HttpError(
       'Fetching users failed, please try again later.',
@@ -35,8 +35,9 @@ const getAllMapMarkers = async (req, res, next) => {
     );
     return next(error);
   }
-  res.json({ markers: markers.map(marker => marker.toObject({ getters: true })) });
+  res.json({ markers: allMarkers.map(marker => marker.toObject({ getters: true })) });
 };
+
 
 // or we search something like this req.userData.userId. I can send something back through the body right?
 const getBizIdInstances = async (req, res, next) => {

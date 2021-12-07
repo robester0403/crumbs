@@ -1,0 +1,47 @@
+@use "variables" as *;
+@use "colors" as *;
+
+@mixin tablet {
+  @media (min-width: $tablet) {
+      @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop) {
+      @content;
+  }
+}
+
+@mixin dt-sec-hdr-style {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+@mixin dt-subhd-style {
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-weight: 600;
+}
+
+@mixin dt-bdy-copy-style {
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+}
+
+@mixin dt-lbls-btn-style {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+@mixin button {
+  text-align: center;
+  border-radius: 1rem;
+  width: 10rem;
+  padding: 0.5rem 1rem;
+  background-color: rgb(58, 170, 58);
+  color:white;
+}

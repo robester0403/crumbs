@@ -68,3 +68,78 @@ https://youtu.be/0ELhQZUc7Lo?t=180
 
 token
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWFiYWJhZDJlZDY1YjM3OGMxNDYyMTMiLCJlbWFpbCI6InNhcmFoY2hhbkBnbWFpbC5jb20iLCJpYXQiOjE2Mzg2ODA2OTEsImV4cCI6MTYzODY4NDI5MX0.S_SF2riR_AnxsqBn_N3-Qz0bbSjwl7PyL_OQOGb9u4o
+
+const influencerDBGetOwnInstances = async (req, res, next) => {
+  const influencerId = req.params.userId;
+  console.log(influencerId)
+  let ownInstances;
+  try {
+      ownInstances = await Instance.find({ userId:influencerId }).populate('instances');
+      } catch (err) {
+        const error = new HttpError(
+          'Fetching instances error.',
+          500
+        );
+        return next(error);
+      }
+    
+      if (!ownInstances || ownInstances.instances.length === 0) {
+        return next(
+          new HttpError('Could not find places for the provided user id.', 404)
+        );
+      }
+    res.json({
+      places: ownInstances.instances.map(place =>
+        place.toObject({ getters: true })
+      )
+    });
+}
+
+const influencerDBGetOwnInstances = async (req, res, next) => {
+  const influencerId = req.params.userId;
+  console.log(userId)
+  let ownInstances;
+  try {
+      ownInstances = await Instance.find({ userId: influencerId }).populate('instances');
+      } catch (err) {
+        const error = new HttpError(
+          'Fetching instances error.',
+          500
+        );
+        return next(error);
+      }
+    
+      if (!ownInstances || ownInstances.instances.length === 0) {
+        return next(
+          new HttpError('Could not find places for the provided user id.', 404)
+        );
+      }
+    res.json({
+      places: ownInstances.instances.map(place =>
+        place.toObject({ getters: true })
+      )
+    });
+}
+
+const influencerDBGetOwnInstances = async (req, res, next) => {
+  let userId = req.params.userId;
+  console.log(userId)
+
+  try {
+    let influencerProfile = await Influencer.findOne({ userId: userId});
+    if (!influencerProfile) {
+      const error = new HttpError(
+        'Could not find your profile.',
+        404
+      );
+      return next(error);
+    }
+    res.json({ influencerProfile: influencerProfile.toObject({ getters: true }) });
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not find the Influencer.',
+      500
+    );
+    return next(error);
+  }
+}

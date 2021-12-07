@@ -186,28 +186,32 @@ const login = async (req, res, next) => {
   });
 };
 
-// this is not done yet complete saturday
+// setSomeState(res.data.instances) is the adaptor
 const influencerDBGetOwnInstances = async (req, res, next) => {
-  let userId = req.params.userId;
-  console.log(userId)
-
+  const influencerId = await req.params.userId;
+  console.log(influencerId)
+  let ownInstances;
   try {
-    let influencerProfile = await Influencer.findOne({ userId: userId});
-    if (!influencerProfile) {
-      const error = new HttpError(
-        'Could not find your profile.',
-        404
-      );
-      return next(error);
-    }
-    res.json({ influencerProfile: influencerProfile.toObject({ getters: true }) });
-  } catch (err) {
-    const error = new HttpError(
-      'Something went wrong, could not find the Influencer.',
-      500
-    );
-    return next(error);
-  }
+      ownInstances = await Instance.find({ userId:influencerId });
+      } catch (err) {
+        const error = new HttpError(
+          'Fetching instances error.',
+          500
+        );
+        return next(error);
+      }
+    
+      if (!ownInstances) {
+        return next(
+          new HttpError('Could not find places for the provided user id.', 404)
+        );
+      }
+
+    res.json({
+      instances: ownInstances.map(instance =>
+        instance.toObject({ getters: true })
+      )
+    });
 }
 
 const influencerDBAddMarkerInstance = async (req, res, next) => {
@@ -218,7 +222,6 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
-  
   const { 
       bizId,
       bizName,
@@ -326,8 +329,6 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
     res.status(201).json({ instance: createdInstance });
   }
 
-// remember to find limit 1 term is name. locale is the country
-// process.env.YELP_URI
 const influencerSearchYelp = async (req, res, next) => {
   const { 
     term,
@@ -374,10 +375,34 @@ const influencerSearchYelp = async (req, res, next) => {
     // res.json(yelpdata);
 }
 
+
+const influencerDBGetProfile = async (req, res, next) => {
+  const influencerId = await req.params.userId;
+
+  let profileData;
+  try {
+    profileData = await Influencer.findOne({ userId:influencerId });
+      } catch (err) {
+        const error = new HttpError(
+          'Fetching instances error.',
+          500
+        );
+        return next(error);
+      }
+    
+      if (!profileData) {
+        return next(
+          new HttpError('Could not find places for the provided user id.', 404)
+        );
+      }
+
+    res.json({ profileData: profileData.toObject({ getters: true }) })
+}
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
 exports.influencerDBGetOwnInstances = influencerDBGetOwnInstances;
+exports.influencerDBGetProfile = influencerDBGetProfile;
 
 
 exports.influencerSearchYelp = influencerSearchYelp;

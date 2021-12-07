@@ -1,0 +1,32 @@
+@use "typography" as *;
+@use "colors" as *;
+@use "mixins" as *;
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: $font-stack;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+}
+
+h5 {
+  margin: 0;
+
+}
+
+a {
+  text-decoration: none;
+  color: initial;
+}
