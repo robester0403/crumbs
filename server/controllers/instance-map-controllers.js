@@ -41,30 +41,34 @@ const getAllMapMarkers = async (req, res, next) => {
 
 // or we search something like this req.userData.userId. I can send something back through the body right?
 const getBizIdInstances = async (req, res, next) => {
-  const bizId = req.params.bizid;
+  const bizId = req.params.bizId;
 
 let bizInstances;
-try {
-  // do I need string interpolation here? for bizId
-  bizInstances = await Instance.find({bizId: bizId}).populate('instances');
-} catch (err) {
-  const error = new HttpError(
-    'Something went wrong, could not find an instance.',
-    500
-  );
-  return next(error);
-}
-
-if (!bizInstances || bizInstances.instances.length === 0) {
-  const error = new HttpError(
-    'Could not find instance for the provided bizId. Check if there is an instance',
-    404
-  );
-  return next(error);
-}
+  try {
+    // do I need string interpolation here? for bizId
+    bizInstances = await Instance.find({bizId: bizId});
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not find an instance.',
+      500
+    );
+    return next(error);
+  }
+  if (!bizInstances) {
+    return next(
+      new HttpError('Could not find places for the provided user id.', 404)
+    );
+  }
+// if (!bizInstances || bizInstances.instances.length === 0) {
+//   const error = new HttpError(
+//     'Could not find instance for the provided bizId. Check if there is an instance',
+//     404
+//   );
+//   return next(error);
+// }
 res.json({
-    places: bizInstances.instances.map(instance =>
-      instance.toObject({ getters: true })
+    instances: bizInstances.map(instance =>
+    instance.toObject({ getters: true })
     )
   });
 };

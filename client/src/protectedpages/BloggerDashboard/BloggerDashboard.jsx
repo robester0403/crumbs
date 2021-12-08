@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {useNavigate, useParams } from 'react-router-dom';
+import BloggerInstanceCards from '../../protectedcomponents/BloggerInstanceCards/BloggerInstanceCards';
 import './BloggerDashboard.scss';
 import React, { useState, useEffect } from "react";
 
@@ -114,9 +115,8 @@ const BloggerDashboard = () => {
           </button>
         </section>
 
-      {/* Body Section */}
 
-        <main>
+
           {/* Aside Menu navigation */}
           <aside>
             <div>
@@ -135,6 +135,9 @@ const BloggerDashboard = () => {
               Settings
             </div>
           </aside>  
+
+        <main>
+                {/* Body Section */}
           {/* should display flex from here */}
           <section>
             {/* Can be condensed into a Yelp Component */}
@@ -193,13 +196,17 @@ const BloggerDashboard = () => {
               <h4>
               </h4>
             </article>
+            <article>
+              
+            </article>
           </section>
-
         </main>
         <main>
-          {/* Map out blogger instances here. */}
-
+        {influencerOwnInst && influencerOwnInst.map(instance => <BloggerInstanceCards
+          renderInstance={instance}
+        />)}
         </main>
+
 
       </>
     )}

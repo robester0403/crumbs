@@ -4,8 +4,8 @@ import FrontPage from "./pages/FrontPage/FrontPage"
 import UserHomePage from "./pages/UserHomePage/UserHomePage"
 import LogIn from "./pages/LogIn/LogIn"
 import SignUp from "./pages/SignUp/SignUp"
-import BloggerDashboard from "./protectedcomponents/BloggerDashboard/BloggerDashboard"
-import BloggerUpload from "./protectedpages/BloggerUpload/BloggerUpload"
+import BloggerDashboard from "./protectedpages/BloggerDashboard/BloggerDashboard"
+
 
 
 document.title = "Crumbs: blogger mapper experience";
@@ -21,7 +21,7 @@ const App = () => {
           <Route path="/login" element={<LogIn/>} />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/login/blogger/:userId" element={<BloggerDashboard/>} />
-          <Route path="/login/blogger/:userId/Upload" element={<BloggerUpload/>} />
+          <Route path="/login/blogger/:userId/Upload" element={<BloggerDashboard/>} />
         </Routes>
       </main>
     </>

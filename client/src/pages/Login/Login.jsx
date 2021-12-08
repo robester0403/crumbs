@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
-import BloggerDashboard from '../../protectedcomponents/BloggerDashboard/BloggerDashboard';
+import BloggerDashboard from '../../protectedpages/BloggerDashboard/BloggerDashboard';
 import React, { useState } from "react";
 import './LogIn.scss';
 
@@ -46,7 +46,7 @@ function LogIn(props) {
                     <label for="email" className="login__label">Email</label>
                     <input type="text" name="email" placeholder="Enter your Email Login" className="login__input"></input>
                     <label for="password" className="login__label">Password</label>
-                    <input type="text" name="password" placeholder="" className="login__input"></input>
+                    <input type="password" name="password" placeholder="" className="login__input"></input>
                 <button type="submit" className="login__btn">Log In</button>
             </form>
             <Link to="/signup" className="login__signup-text">

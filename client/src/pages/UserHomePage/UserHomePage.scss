@@ -1,23 +1,25 @@
+.userHomePage {
+
+  &__wrap {
+    margin: 0 auto;
+    max-width: 64rem;
+  }
+
+  &__map-ctnr {
+    max-width: 64rem;
+  }
+}
+
 .marker-btn {
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.marker-btn-img {
-  width: 2rem;
-  height: 2rem;
-}
 
-.userHomePage {
-  display: flex;
-  flex-direction: column;
+
+
+.popup{
   
-  &__map-ctnr{
-    width:100%;
-  }
-}
-
-.popup-img{
   width: 20rem;
 }

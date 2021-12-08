@@ -1,6 +1,6 @@
 import './FrontPage.scss';
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.JPG";
+import logo from "../../assets/images/Crumbs-01.jpg";
 import frontpageimage1 from "../../assets/images/frontpageimage1.JPG";
 import youtubefrontimage from "../../assets/images/youtubefrontimage.JPG";
 

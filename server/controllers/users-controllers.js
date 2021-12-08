@@ -188,18 +188,18 @@ const login = async (req, res, next) => {
 
 // setSomeState(res.data.instances) is the adaptor
 const influencerDBGetOwnInstances = async (req, res, next) => {
-  const influencerId = await req.params.userId;
-  console.log(influencerId)
+  const userId = await req.params.userId;
+
   let ownInstances;
   try {
-      ownInstances = await Instance.find({ userId:influencerId });
-      } catch (err) {
-        const error = new HttpError(
-          'Fetching instances error.',
-          500
-        );
-        return next(error);
-      }
+    ownInstances = await Instance.find({ userId:userId });
+    } catch (err) {
+      const error = new HttpError(
+        'Fetching instances error.',
+        500
+      );
+      return next(error);
+    }
     
       if (!ownInstances) {
         return next(

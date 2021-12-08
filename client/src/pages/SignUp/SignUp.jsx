@@ -33,7 +33,7 @@ const SignUp = (props) => {
                     <label for="email" className="signup__label">Email</label>
                     <input type="text" className="signup__input" name="email" placeholder="Enter your Email Login"></input>
                     <label for="password" className="signup__label">Password</label>
-                    <input type="text" className="signup__input" name="password" placeholder=""></input>
+                    <input type="password" className="signup__input" name="password" placeholder=""></input>
                 <button type="submit" className="signup__btn">Sign Up!</button>
             </form>
             <Link to="/login" className="signup__signup-text">Log In</Link>

@@ -1,3 +1,14 @@
-.header {
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
+
+.nav-bar {
   display: flex;
+  flex-direction: row;
+  background-color: $med-bg-color;
+
+  &__logo {
+    width: 10rem;
+  }
+
 }

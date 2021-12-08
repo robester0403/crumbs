@@ -11,7 +11,7 @@ const router = express.Router();
 router.get('/inst/all', instanceMapController.getAllInstances);
 router.get('/marker/all', instanceMapController.getAllMapMarkers);
 // click on a marker and then get here. the map function can create some links that have string interpolation
-router.get('/inst/:bizid', instanceMapController.getBizIdInstances);
+router.get('/inst/:bizId', instanceMapController.getBizIdInstances);
 
 
 module.exports = router;

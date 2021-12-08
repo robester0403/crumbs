@@ -1,15 +1,12 @@
 
-import './MapInstanceCards.scss';
+import './BloggerInstanceCards.scss';
 
-function MapInstanceCards({renderInstance, selectVideoFunc}) {
+function BloggerInstanceCards({renderInstance}) {
   // We might need to change this
-  const selectTrigger = (e) => {
-    e.preventDefault();
-    selectVideoFunc(renderInstance);
-  };
+
   return (
     <>
-      <section onClick={selectTrigger}>
+      <section>
         <h4>
           {renderInstance.bizName}
         </h4>
@@ -31,4 +28,4 @@ function MapInstanceCards({renderInstance, selectVideoFunc}) {
   )
 }
 
-export default MapInstanceCards;
+export default BloggerInstanceCards;
