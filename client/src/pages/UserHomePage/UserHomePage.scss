@@ -39,16 +39,14 @@
     font-weight: 700;
   }
 
-  &__contact-ctnr {
-    @include dt-bdy-copy-style
-  }
-
-  &__phone {
-
+  &__sub-ctnr {
+    @include dt-bdy-copy-style;
+    display: flex;
+    justify-content: space-between;
   }
 
   &__weblink {
-
+    font-weight: 500;
   }
 
   &__img-ctnr {
@@ -75,17 +73,21 @@
   &__uber-btn {
     @include button-form;
     width: 32%;
+    padding: 0.35rem 0;
+    text-align: center;
   }
 
   &__otable-btn {
     @include button-form;
     background-color: $opentable-color;
+    padding: 0.35rem 0;
     width: 32%;
   }
 
   &__direct-btn {
     @include button-form;
     background-color: $googledirect-color;
+    padding: 0.35rem 0;
     width: 32%;
   }
 }

@@ -1,12 +1,10 @@
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
-import BloggerDashboard from '../../protectedpages/BloggerDashboard/BloggerDashboard';
 import React, { useState } from "react";
 import './LogIn.scss';
 
 
-function LogIn(props) {
-    let token = sessionStorage.getItem('authToken')
+function LogIn() {
     let navigate=useNavigate();
     
     const [bloggerDetArr, setBloggerDetArr] = useState(null);

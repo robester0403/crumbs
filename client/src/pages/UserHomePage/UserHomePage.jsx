@@ -1,11 +1,11 @@
 import './UserHomePage.scss';
 import Header from "../../components/Header/Header";
 import MapInstanceCards from '../../components/MapInstanceCards/MapInstanceCards';
-import Footer from "../../components/Footer/Footer";
 import React, { useState, useEffect } from "react";
 import ReactMapGL, {Marker, Popup} from "react-map-gl";
 import mapmarker from "../../assets/images/food-icon.png";
 import axios from 'axios';
+
 
 
 const UserHomePage = () => {
@@ -48,7 +48,6 @@ const UserHomePage = () => {
 
     await axios.get(`http://localhost:5000/api/instancemap/inst/${targetBizId}`)
     .then(res=> {
-      console.log(res.data.instances)
       setSelectedInstancesArr(res.data.instances)
 
     })
@@ -66,16 +65,6 @@ const UserHomePage = () => {
       onLoadInstance()
       }
       , [viewport.width])
-  // useEffect(() => {
-  //       console.log(parseFloat(markerArr[0].latitude.$numberDecimal))
-  //     }
-  //     , [markerArr])
-
-  // the below will overwrite just the width
-  // useEffect(() => {
-  //   setViewport({...viewport, width: window.innerWidth});
-  //   }
-  //   , [window.innerWidth])
   
   return (
     <>
@@ -130,33 +119,31 @@ const UserHomePage = () => {
                     <h3 className="popup__header">
                       {selectedMarker.bizName}
                     </h3>
-                    <h4 className="popup__body">
+                    <h4 className="popup__sub-ctnr">
+                      <div className="popup__body">
                         <span className="popup__body-bold">{selectedMarker.rating}</span>/5 Crumbs, Price: <span className="popup__body-bold">{selectedMarker.price}</span>
+                      </div>
+                      <div className="popup__weblink">
+                        <a href={selectedMarker.url} alt="Website Link" target='_blank' rel="noreferrer"> Website Link</a>
+                      </div>
                     </h4>
                     <h4 className="popup__body">
                       {selectedMarker.address1} {selectedMarker.address2} {selectedMarker.address3}, {selectedMarker.city}, {selectedMarker.state}, {selectedMarker.country}
                     </h4>
-                    {/* <h4 className="popup__body">
-                    </h4> */}
-                    <div className="popup__contact-ctnr">
-                      <div className="popup__phone">
+                      <div className="popup__body">
                         {selectedMarker.phone}
                       </div>
-                      <div className="popup__weblink">
-                        <a href={selectedMarker.url} alt="Website Link" target='_blank'> Website Link</a>
-                      </div>
-                    </div>
                     <div className="popup__img-ctnr">
-                      <img className="popup__img" src={selectedMarker.imageUrl} />
+                      <img className="popup__img" src={selectedMarker.imageUrl} alt={selectedMarker.bizName} />
                     </div>
                     <div className="popup__btn-ctnr">
-                        <a href="https://www.ubereats.com/" className="popup__uber-btn">
-                          Order Ubereats
+                        <a href="https://www.ubereats.com/" alt="UberEats link" className="popup__uber-btn">
+                          Order UberEats
                         </a>
-                        <a className="popup__otable-btn">
+                        <a href="https://www.opentable.com/" alt="Opentable link" className="popup__otable-btn">
                           OpenTable
                         </a>
-                        <a className="popup__direct-btn">
+                        <a href="https://www.google.com/maps" alt="GoogleMaps link" className="popup__direct-btn">
                           Directions
                         </a>
                     </div>
@@ -176,18 +163,19 @@ const UserHomePage = () => {
           {
           !selectedInstancesArr ? 
             instancesArr && instancesArr.map(instance => <MapInstanceCards
+                key={instance.id}
                 renderInstance={instance}
                 selectVideoFunc={setSelectedVideo}
               />) 
               :  
               // If there is then render the selected
               selectedInstancesArr && selectedInstancesArr.map(instance => <MapInstanceCards
+                key={instance.id}
                 renderInstance={instance}
                 selectVideoFunc={setSelectedVideo}
               />)}
           
           </div>
-        <Footer/>
         </main>
       </div>
     </>

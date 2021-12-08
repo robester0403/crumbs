@@ -42,7 +42,6 @@ const BloggerDashboard = () => {
     .then(res =>  
       setYelpSearchData(res.data)
     )
-    console.log(yelpSearchData)
   }
 
 
@@ -50,7 +49,6 @@ const BloggerDashboard = () => {
     e.preventDefault();
     let fixUrl = e.target.medialink.value.replace("youtu.be","www.youtube.com/embed");
     let mediaLinkUrl = fixUrl + "?start=" + e.target.starttime.value
-    console.log(`http://localhost:5000/api/users/loggedin/${userId}/addmarkinst`);
     axios.post(`http://localhost:5000/api/users/loggedin/${userId}/addmarkinst`, 
       {
         bizId: yelpSearchData.bizId,
@@ -79,7 +77,6 @@ const BloggerDashboard = () => {
       }
     )
     .then( 
-      console.log('marker set up')
     )
   }
 
@@ -174,6 +171,7 @@ const BloggerDashboard = () => {
             </div>
             <article className="">
         {influencerOwnInst && influencerOwnInst.map(instance => <BloggerInstanceCards
+          key={instance.id}
           renderInstance={instance}
         />)}
             </article>

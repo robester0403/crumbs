@@ -44,6 +44,7 @@
   padding: 0.65rem 1rem;
   background-color: $green-color;
   color:white;
+  cursor: pointer;
 }
 
 @mixin button-form {
@@ -56,6 +57,7 @@
   border: none;
   box-shadow: 2px;
   padding: none;
+  cursor: pointer;
 }
 
 @mixin input-field {

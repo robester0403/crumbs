@@ -67,6 +67,7 @@ body {
     margin: 1rem 1rem;
     @include button;
     box-shadow: 2px 2px #888888;
+    cursor: pointer;
   }
 }
 

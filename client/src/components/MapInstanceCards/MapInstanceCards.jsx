@@ -1,6 +1,7 @@
 
 import './MapInstanceCards.scss';
 import avatar from "../../assets/images/avatar.png";
+import playicon from "../../assets/images/play-icon.png";
 
 function MapInstanceCards({renderInstance, selectVideoFunc}) {
   // We might need to change this
@@ -12,7 +13,7 @@ function MapInstanceCards({renderInstance, selectVideoFunc}) {
     <>
       <section className="instance-card">
         <div className="instance-card__avatar">
-          <img className="instance-card__avatar-img" src={avatar}/>
+          <img className="instance-card__avatar-img" src={avatar} alt="avatar of influencer"/>
         </div>
         <div className="instance-card__text-ctnr">
           <h4 className="instance-card__influencer">
@@ -37,7 +38,7 @@ function MapInstanceCards({renderInstance, selectVideoFunc}) {
         </div>
 
         <div className="instance-card__text-ctnr-play" onClick={selectTrigger}>
-          play icon
+          <img className="instance-card__play-img" src={playicon} alt="play video button"/>
         </div>
         
       </section>
