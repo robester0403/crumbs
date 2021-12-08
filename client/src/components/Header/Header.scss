@@ -2,13 +2,26 @@
 @use '../../styles/partials/colors' as *;
 @use '../../styles/partials/mixins' as *;
 
+
 .nav-bar {
   display: flex;
   flex-direction: row;
-  background-color: $med-bg-color;
+  background-color: $dark-bg-color;
+  color: white;
+
 
   &__logo {
-    width: 10rem;
+    width: 7rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include dt-sec-hdr-style;
+    font-weight: 400;
+    margin-left: 1.5rem;
   }
 
 }

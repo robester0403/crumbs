@@ -26,15 +26,21 @@
 .popup{
 
   &__header {
-
+    @include dt-sec-hdr-style;
+    margin-bottom: 0.25rem;
   }
 
   &__body {
+    @include dt-bdy-copy-style
+  }
 
+  &__body-bold {
+    color: $green-color;
+    font-weight: 700;
   }
 
   &__contact-ctnr {
-
+    @include dt-bdy-copy-style
   }
 
   &__phone {

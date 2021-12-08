@@ -124,13 +124,14 @@ const UserHomePage = () => {
                 onClose={() => {
                   setSelectedMarker(null)
                   setSelectedInstancesArr(null)
+                  setSelectedVideo(null)
                   }}>
                   <article className="popup">
                     <h3 className="popup__header">
                       {selectedMarker.bizName}
                     </h3>
                     <h4 className="popup__body">
-                        {selectedMarker.rating}/5 Crumbs, Price: {selectedMarker.price}
+                        <span className="popup__body-bold">{selectedMarker.rating}</span>/5 Crumbs, Price: <span className="popup__body-bold">{selectedMarker.price}</span>
                     </h4>
                     <h4 className="popup__body">
                       {selectedMarker.address1} {selectedMarker.address2} {selectedMarker.address3}, {selectedMarker.city}, {selectedMarker.state}, {selectedMarker.country}
@@ -167,7 +168,7 @@ const UserHomePage = () => {
           <section>
             {/* enter the mediaURL later. also an if statement that if there is no mediaURL then it will not appear */}
 
-            {selectedVideo && <iframe width="1024" height="576" src="https://www.youtube.com/embed/nE4kI3X_faU" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
+            {selectedVideo && <iframe width="1024" height="576" src={selectedVideo.mediaLinkUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
           </section>
           <div>
 

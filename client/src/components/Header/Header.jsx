@@ -1,6 +1,6 @@
 import './Header.scss';
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo-transparent.png";
+import logo from "../../assets/images/logo2.png";
 
 
 const Header = () => {
@@ -14,16 +14,20 @@ const Header = () => {
             <img className="nav-bar__logo" src={logo} alt="Company logo"/>
           </Link>
         </div>
-        <div className="">
-          <Link to={"/userhome/"}>
+        <div className="nav-bar__header">
+          <Link to={"/"}>
             CrumbsTrails
           </Link>
         </div>
-        <div className="">
-          About Us
+        <div className="nav-bar__header">
+          <Link to={"/signup"}>
+            Join Us
+          </Link>
         </div>
-        <div className="">
+        <div className="nav-bar__header">
+        <Link to={"/login"}>
           Vlogger Login
+        </Link>
         </div>
       </section>
 
