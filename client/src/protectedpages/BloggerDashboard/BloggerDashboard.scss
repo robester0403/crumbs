@@ -1,2 +1,82 @@
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
 
 
+.nav-bar {
+  background-color: $dark-text-color;
+  color: white;
+  @include dt-subhd-style;
+  font-weight: 400;
+  margin: 0 auto;
+  max-width: 64rem;
+
+  &__profile-ctnr {
+    padding: 1rem;
+  }
+
+  &__logout-btn {
+    @include button;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    padding: 0.25rem;
+  }
+
+  &__ctnr {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 60%;
+  }
+
+  &__header {
+    @include dt-subhd-style;
+    font-size: 1.5rem;
+  }
+}
+
+.dashboard {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  max-width: 64rem;
+
+  &__forms-ctnr {
+    width: 32rem;
+  }
+
+  &__subheading {
+    margin-bottom: 1rem;
+  }
+
+  &__yelp-ctnr {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  &__form-lbl {
+    @include dt-lbls-btn-style;
+    font-size: 1rem;
+  }
+
+  &__form-input {
+    @include input-field;
+    width: 25rem;
+  }
+
+  &__form-submit {
+    @include button-form
+  }
+
+  &__search-results {
+    @include dt-bdy-copy-style;
+  }
+}

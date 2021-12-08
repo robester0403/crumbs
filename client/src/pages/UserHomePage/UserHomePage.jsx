@@ -150,15 +150,15 @@ const UserHomePage = () => {
                       <img className="popup__img" src={selectedMarker.imageUrl} />
                     </div>
                     <div className="popup__btn-ctnr">
-                        <button className="popup__uber-btn">
+                        <a href="https://www.ubereats.com/" className="popup__uber-btn">
                           Order Ubereats
-                        </button>
-                        <button className="popup__otable-btn">
+                        </a>
+                        <a className="popup__otable-btn">
                           OpenTable
-                        </button>
-                        <button className="popup__direct-btn">
+                        </a>
+                        <a className="popup__direct-btn">
                           Directions
-                        </button>
+                        </a>
                     </div>
                   </article>
                 </Popup>

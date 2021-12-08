@@ -57,3 +57,10 @@
   box-shadow: 2px;
   padding: none;
 }
+
+@mixin input-field {
+  width: 24rem;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}

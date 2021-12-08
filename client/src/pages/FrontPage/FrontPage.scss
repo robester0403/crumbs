@@ -10,8 +10,14 @@ body {
 }
 .front{
 
-  &__wrap {
+  &__bg-image {
+    background: url(../../assets/images/front-bg-blur-light-dark.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
+  &__wrap {
     max-width: 64rem;
     margin: 0 auto;
     display: flex;
@@ -23,27 +29,35 @@ body {
   
   &__wrap {
 
+    background-color: rgba(224, 224, 202, 0.925);
+    border-radius: 0.5rem;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    width: 32rem;
+    width: 22rem;
+    margin: auto 5rem
   }
 
 
   &__title {
     margin: 2rem 1rem;
+    font-weight: 600;
+    font-size: 2rem;
     text-align: center;
-    color: $red-text-color
+    color: $dark-text-color
   }
 
   &__body-text {
-    margin: 1rem 3rem;
+    font-weight: 400;
+    margin: 1rem 1rem;
+    color: $red-text-color;
     text-align: center;
   }
 
   &__btn-ctnr {
-    margin-top: 4rem;
+    margin: 2.5rem 0 1rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,6 +66,7 @@ body {
   &__button {
     margin: 1rem 1rem;
     @include button;
+    box-shadow: 2px 2px #888888;
   }
 }
 
@@ -63,7 +78,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url(../../assets/images/phone-overlay2.png);
+  background: url(../../assets/images/phone-overlay-white-bg.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -75,7 +90,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: $light-bg-color;
+
     width: 24.81rem;
     margin-left: 0.3rem;
   }
@@ -83,6 +98,7 @@ body {
   &__logo {
     padding-top: 2rem;
     width: 10rem;
+    margin-bottom: 1rem;
   }
 
   &__image {

@@ -36,11 +36,7 @@ body {
   }
 
   &__input {
-    width: 24rem;
-    padding: 0.4rem;
-    margin-bottom: 1rem;
-    border-radius: 0.25rem;
-    box-shadow: none;
+    @include input-field;
   }
 
   &__btn {

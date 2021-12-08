@@ -1,0 +1,18 @@
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
+
+.bloggercards {
+  margin: 1rem;
+  border: solid 1px $dark-border-color;
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  &__subheader {
+    @include dt-subhd-style
+  }
+
+  &__body {
+    @include dt-bdy-copy-style
+  }
+}
