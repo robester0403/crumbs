@@ -14,20 +14,6 @@ const BloggerDashboard = () => {
 // use params give you access to URL params on the http address. the params being the same in the URL
   let { userId } = useParams();
 
-  const onLoadProfile = async () => {
-    await axios.get(`http://localhost:5000/api/users/loggedin/${userId}/profile`, {headers: { 'Authorization': `Bearer ${token}`}})
-    .then(res =>  
-      setInfluencerProfileData(res.data.profileData)
-    )
-  }
-
-  const onLoadInstances = async () => {
-    await axios.get(`http://localhost:5000/api/users/loggedin/${userId}`, {headers: { 'Authorization': `Bearer ${token}`}})
-    .then(res =>  
-      setInfluencerOwnInst(res.data.instances)
-    )
-  }
-
   const handleYelpSearch = async (e) => {
     e.preventDefault();
     console.log(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`);
@@ -81,10 +67,16 @@ const BloggerDashboard = () => {
   }
 
   useEffect(() => {
-    onLoadInstances();
-    onLoadProfile();
+    axios.get(`http://localhost:5000/api/users/loggedin/${userId}/profile`, {headers: { 'Authorization': `Bearer ${token}`}})
+    .then(res =>  
+      setInfluencerProfileData(res.data.profileData)
+    )
+    axios.get(`http://localhost:5000/api/users/loggedin/${userId}`, {headers: { 'Authorization': `Bearer ${token}`}})
+    .then(res =>  
+      setInfluencerOwnInst(res.data.instances)
+    )
     }
-    , [])
+    , [token, userId])
 
   const handleLogOut = (e) => {
     e.preventDefault();
