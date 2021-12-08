@@ -22,7 +22,7 @@ const UserHomePage = () => {
     longitude: -79.385555,
     width: "64rem",
     height: "50vh",
-    zoom: 12
+    zoom: 9
   });
   
   
@@ -118,45 +118,48 @@ const UserHomePage = () => {
               };
             {selectedMarker ? (
                 // 3B Close removes the marker and 
-                <Popup
+                <Popup className="popup"
                 latitude={parseFloat(selectedMarker.latitude.$numberDecimal)}
                 longitude={parseFloat(selectedMarker.longitude.$numberDecimal)}
                 onClose={() => {
                   setSelectedMarker(null)
                   setSelectedInstancesArr(null)
                   }}>
-                  <h3 className="">
-                    {selectedMarker.bizName}, 
-                    <h4 className="">
-                      {selectedMarker.rating}/5 Crumbs, Price: {selectedMarker.price}
+                  <article className="popup">
+                    <h3 className="popup__header">
+                      {selectedMarker.bizName}
+                    </h3>
+                    <h4 className="popup__body">
+                        {selectedMarker.rating}/5 Crumbs, Price: {selectedMarker.price}
                     </h4>
-                  </h3>
-                  <h4 className="">
-                    {selectedMarker.address1} {selectedMarker.address2} {selectedMarker.address3}
-                  </h4>
-                  <h4 className="">
-                    {selectedMarker.city} {selectedMarker.state}, {selectedMarker.country}
-                  </h4>
-                  <h4 className="">
-                    {selectedMarker.phone}
-                  </h4>
-                  <h4 className="">
-                    <a href={selectedMarker.url} alt="Website Link" target='_blank'> Website Link</a>
-                  </h4>
-                  <div className="popup-img__img-ctnr">
-                    <img src={selectedMarker.imageUrl} />
-                  </div>
-                  <div>
-                      <button className="">
-                        Order UberEats
-                      </button>
-                      <button className="">
-                        OpenTable
-                      </button>
-                      <button className="">
-                        Directions
-                      </button>
-                  </div>
+                    <h4 className="popup__body">
+                      {selectedMarker.address1} {selectedMarker.address2} {selectedMarker.address3}, {selectedMarker.city}, {selectedMarker.state}, {selectedMarker.country}
+                    </h4>
+                    {/* <h4 className="popup__body">
+                    </h4> */}
+                    <div className="popup__contact-ctnr">
+                      <div className="popup__phone">
+                        {selectedMarker.phone}
+                      </div>
+                      <div className="popup__weblink">
+                        <a href={selectedMarker.url} alt="Website Link" target='_blank'> Website Link</a>
+                      </div>
+                    </div>
+                    <div className="popup__img-ctnr">
+                      <img className="popup__img" src={selectedMarker.imageUrl} />
+                    </div>
+                    <div className="popup__btn-ctnr">
+                        <button className="popup__uber-btn">
+                          Order Ubereats
+                        </button>
+                        <button className="popup__otable-btn">
+                          OpenTable
+                        </button>
+                        <button className="popup__direct-btn">
+                          Directions
+                        </button>
+                    </div>
+                  </article>
                 </Popup>
               ): null}  
             </ReactMapGL>

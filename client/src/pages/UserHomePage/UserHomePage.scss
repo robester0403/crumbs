@@ -1,3 +1,7 @@
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
+
 .userHomePage {
 
   &__wrap {
@@ -20,6 +24,62 @@
 
 
 .popup{
-  
-  width: 20rem;
+
+  &__header {
+
+  }
+
+  &__body {
+
+  }
+
+  &__contact-ctnr {
+
+  }
+
+  &__phone {
+
+  }
+
+  &__weblink {
+
+  }
+
+  &__img-ctnr {
+    width: 25rem;
+    height:15rem;
+
+  }
+
+  &__img {
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+  }
+
+  &__btn-ctnr {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+
+  &__uber-btn {
+    @include button-form;
+    width: 32%;
+  }
+
+  &__otable-btn {
+    @include button-form;
+    background-color: $opentable-color;
+    width: 32%;
+  }
+
+  &__direct-btn {
+    @include button-form;
+    background-color: $googledirect-color;
+    width: 32%;
+  }
 }
