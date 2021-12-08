@@ -59,21 +59,12 @@ let bizInstances;
       new HttpError('Could not find places for the provided user id.', 404)
     );
   }
-// if (!bizInstances || bizInstances.instances.length === 0) {
-//   const error = new HttpError(
-//     'Could not find instance for the provided bizId. Check if there is an instance',
-//     404
-//   );
-//   return next(error);
-// }
 res.json({
     instances: bizInstances.map(instance =>
     instance.toObject({ getters: true })
     )
   });
 };
-
-
 
 exports.getAllInstances = getAllInstances;
 exports.getAllMapMarkers = getAllMapMarkers;

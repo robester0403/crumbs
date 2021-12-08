@@ -2,16 +2,11 @@ import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
 import './SignUp.scss';
 
-const SignUp = (props) => {
-    let navigate=useNavigate();
+const SignUp = () => {
+    let navigate = useNavigate();
     
     const handleSignUp = (e) => {
         e.preventDefault();
-        console.log({
-            name: e.target.name.value,
-            email: e.target.email.value,
-            password: e.target.password.value
-        })
 
         axios.post('http://localhost:5000/api/users/signup', {
             name: e.target.name.value,
@@ -19,7 +14,6 @@ const SignUp = (props) => {
             password: e.target.password.value
         })
         .then(res => {
-            console.log(res)
             navigate(`/login`)
         })
     }

@@ -16,7 +16,6 @@ const BloggerDashboard = () => {
 
   const handleYelpSearch = async (e) => {
     e.preventDefault();
-    console.log(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`);
     await axios.post(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`, 
       {
         term: e.target.searchbizname.value,
@@ -105,7 +104,6 @@ const BloggerDashboard = () => {
         </main>  
         <main className="dashboard">
             <div className="dashboard__forms-ctnr">
-              {/* Can be condensed into a Yelp Component */}
               <article className="dashboard__yelp-ctnr">
                 <h1 className="dashboard__subheading">
                   Create a new CrumbTrail!
@@ -126,8 +124,6 @@ const BloggerDashboard = () => {
                     </button>
                   </form>
                   <div className="dashboard__subheading">
-                    {/* In the future add be the first to post here logic */}
-                    {/* Maybe make entire section conditional */}
                     <h3 className="dashboard__subheading">
                       Yelp Search Results
                     </h3>

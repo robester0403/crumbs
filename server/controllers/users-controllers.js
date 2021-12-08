@@ -222,6 +222,7 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
+
   const { 
       bizId,
       bizName,
@@ -245,7 +246,6 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
       reviewCount,
   } = req.body;
 
-  // this line tries to find
   let existingMarker = await Marker.findOne({ bizId: bizId });
   const createdMarker = new Marker({
     bizId,
@@ -265,7 +265,7 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
     url,
     reviewCount,
   });
-  console.log(createdMarker)
+
   if (!existingMarker) {
     try {
       createdMarker.save();
@@ -276,8 +276,6 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
       );
       return next(error);
     }
-    console.log(createdMarker)
-    console.log("we are in the catch")
   }
 
 // ===== code up to here is working
@@ -334,11 +332,10 @@ const influencerSearchYelp = async (req, res, next) => {
     term,
     location
   } = req.body;
-// there is something wrong with the url string
+
   const queryterm = `term=` + `${term}`
   const querylocation = `location=` + `${location}`
-  // const querylocale = `locale=` + `${locale}`
-  // console.log(`https://api.yelp.com/v3/businesses/search?${queryterm}&${querylocation}&limit=1`)
+
   await axios.get(
     `https://api.yelp.com/v3/businesses/search?${queryterm}&${querylocation}&limit=1`,
       {
@@ -369,10 +366,8 @@ const influencerSearchYelp = async (req, res, next) => {
     })
     .catch((err) => {
       console.log('failed to grab user devices');
-      // res.send('err');
     });
     
-    // res.json(yelpdata);
 }
 
 
@@ -403,159 +398,5 @@ exports.signup = signup;
 exports.login = login;
 exports.influencerDBGetOwnInstances = influencerDBGetOwnInstances;
 exports.influencerDBGetProfile = influencerDBGetProfile;
-
-
 exports.influencerSearchYelp = influencerSearchYelp;
 exports.influencerDBAddMarkerInstance = influencerDBAddMarkerInstance;
-
-
-// exports.influencerDBAddMarker = influencerDBAddMarker;
-// exports.influencerDBAddInstance = influencerDBAddInstance;
-
-// const influencerDBAddMarker = async (req, res, next) => {
-//   const errors = validationResult(req);
-//   // stop here if errors in req
-//   if (!errors.isEmpty()) {
-//     return next(
-//       new HttpError('Invalid inputs passed, please check your data.', 422)
-//     );
-//   }
-
-//   const { 
-//       bizId,
-//       bizName,
-//       imageUrl,
-//       address1,
-//       address2,
-//       address3,
-//       city,
-//       country,
-//       state,
-//       phone,
-//       latitude,
-//       longitude
-//   } = req.body;
-// // if marker is not found {
-// //   create marker
-// // } 
-// // let test = await Marker.findOne({ bizId: bizId })
-// // if (!test)
-//   // change this to an if statement so that if. An empyt object is true
-//   let existingMarker;
-//   try {
-//     existingMarker = await Marker.findOne({ bizId: bizId });
-//   } catch (err) {
-//     const error = new HttpError(
-//       'Add Marker failed.',
-//       500
-//     );
-//     return next(error);
-//   }
-// // if marker exists
-//   if (existingMarker) {
-//     const error = new HttpError(
-//       'Marker exists already, please add your instance instead.',
-//       422
-//     );
-//     return next(error);
-//   }
-
-//   const createdMarker = new Marker({
-//     bizId,
-//     bizName,
-//     imageUrl,
-//     address1,
-//     address2,
-//     address3,
-//     city,
-//     country,
-//     state,
-//     phone,
-//     latitude,
-//     longitude
-//   });
-
-//   try {
-//     await createdMarker.save();
-//   } catch (err) {
-//     const error = new HttpError(
-//       'Signing up failed, please try again later.',
-//       500
-//     );
-//     return next(error);
-//   }
-// // this is just a object we send back to the front as confirmation. Don't know if we need it.
-//   res.status(201).json({ marker: createdMarker });
-// };
-
-
-// const influencerDBAddInstance = async (req, res, next) => {
-//   const errors = validationResult(req);
-//   if (!errors.isEmpty()) {
-//     return next(
-//       new HttpError('Invalid inputs passed, please check your data.', 422)
-//     );
-//   }
-
-//   const { 
-//     bizId,
-//     bizName,
-//     userId,
-//     name,
-//     address1,
-//     city,
-//     country,
-//     state,
-//     mediaLinkUrl,
-//     mediaEmbed,
-//     phone
-//   } = req.body;
-
-//   let existingInstance;
-//   try {
-//     existingInstance = await Instance.findOne({ bizId: bizId });
-//   } catch (err) {
-//     const error = new HttpError(
-//       'Add Instance failed.',
-//       500
-//     );
-//     return next(error);
-//   }
-
-//   if (existingInstance) {
-//     const error = new HttpError(
-//       'Instance exists already, please add your instance instead.',
-//       422
-//     );
-//     return next(error);
-//   }
-
-
-//   const createdInstance = new Instance({
-//     bizId,
-//     bizName,
-//     userId,
-//     name,
-//     address1,
-//     city,
-//     country,
-//     state,
-//     mediaLinkUrl,
-//     mediaEmbed,
-//     phone
-//   });
-
-//   try {
-//     await createdInstance.save();
-//   } catch (err) {
-//     const error = new HttpError(
-//       'Signing up failed, please try again later.',
-//       500
-//     );
-//     return next(error);
-//   }
-// // this is just a object we send back to the front as confirmation. Don't know if we need it.
-//   res.status(201).json({ instance: createdInstance });
-// };
-
-// // ==========================================================

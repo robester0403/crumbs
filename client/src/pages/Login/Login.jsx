@@ -11,31 +11,19 @@ function LogIn() {
 
     const handleLogIn = (e) => {
         e.preventDefault();
-
-        // Delete after
-        console.log({
-            email: e.target.email.value,
-            password: e.target.password.value
-        })
-
         axios.post('http://localhost:5000/api/users/login', {
             email: e.target.email.value,
             password: e.target.password.value
         })
         .then(res => {
-            console.log(res)
             let token = res.data.token
-            console.log(token)
             sessionStorage.setItem('authToken', token)
             setBloggerDetArr(res.data)
-            console.log(bloggerDetArr)
-            console.log(res.data.userId)
             if (token) {
                 // Pass id through here 
                 return navigate(`/login/blogger/${res.data.userId}`)}
         })
     }
-
 
     return (
         <div className="login__ctnr">
@@ -55,8 +43,5 @@ function LogIn() {
             </Link>
         </div>
     )} 
-
-    // This may be more optimized to use less Axios and less resources
-
 
 export default LogIn;

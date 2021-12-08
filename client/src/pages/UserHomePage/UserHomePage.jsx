@@ -22,7 +22,7 @@ const UserHomePage = () => {
     longitude: -79.385555,
     width: "64rem",
     height: "50vh",
-    zoom: 9
+    zoom: 10.5
   });
   
   
@@ -49,7 +49,6 @@ const UserHomePage = () => {
     await axios.get(`http://localhost:5000/api/instancemap/inst/${targetBizId}`)
     .then(res=> {
       setSelectedInstancesArr(res.data.instances)
-
     })
     .catch(error => console.log(error))
   }
