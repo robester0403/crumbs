@@ -2,7 +2,10 @@
 @use '../../styles/partials/colors' as *;
 @use '../../styles/partials/mixins' as *;
 
-
+a {
+  color: #ffffff;
+  font-size: initial;
+}
 .nav-bar {
   display: flex;
   flex-direction: row;
@@ -19,8 +22,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    @include dt-sec-hdr-style;
-    font-weight: 400;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 300;
     margin-left: 1.5rem;
   }
 

@@ -9,7 +9,6 @@ const FrontPage = () => {
   return (
     <>
     <div className="front__bg-image">
-      {/* display column here in the container background image being phone */}
         <main className="front__wrap">
           <section className="front-aside__wrap">
             <article>

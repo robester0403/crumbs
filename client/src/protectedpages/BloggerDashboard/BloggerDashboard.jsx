@@ -11,7 +11,6 @@ const BloggerDashboard = () => {
   const [influencerOwnInst, setInfluencerOwnInst] = useState(null);
   const [influencerProfileData, setInfluencerProfileData] = useState(null);
   const [yelpSearchData, setYelpSearchData] = useState(null);
-// use params give you access to URL params on the http address. the params being the same in the URL
   let { userId } = useParams();
 
   const handleYelpSearch = async (e) => {
@@ -62,6 +61,7 @@ const BloggerDashboard = () => {
       }
     )
     .then( 
+      window.location.reload(false)
     )
   }
 
@@ -141,7 +141,6 @@ const BloggerDashboard = () => {
                     </h4>
                 </div>
               </article>
-              {/* Can be condensed into a MarkInst Component */}
               <article>
                 <h1 className="dashboard__subheading">
                   Step 2:Share Your Media

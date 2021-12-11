@@ -30,11 +30,16 @@
 
   &__influencer {
     color: $opentable-color;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+
+  &__bizname {
+    color: black;
+    font-size: 1rem;
   }
 
   &__text-ctnr-play {
-    width: 6rem;
+    width: 5rem;
     cursor: pointer;
     object-fit: contain;
   }

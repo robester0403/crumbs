@@ -8,10 +8,23 @@ body {
 }
 
 .login {
+  
+  &__wrap {
+    margin: 0 auto;
+    width: 64rem;
+    height: 60rem;
+    background-image: url(../../assets/images/bgimage-dark.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &__ctnr {
-    margin: 15rem auto;
     width: 26rem;
+    height: 20rem;
     display: flex;
     flex-direction: column;
     align-items: center;

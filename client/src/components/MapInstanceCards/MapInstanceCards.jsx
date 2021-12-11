@@ -19,7 +19,7 @@ function MapInstanceCards({renderInstance, selectVideoFunc}) {
           <h4 className="instance-card__influencer">
             {renderInstance.name}
           </h4>
-          <h4 className="">
+          <h4 className="instance-card__bizname">
             {renderInstance.bizName}
           </h4>
         </div>

@@ -19,19 +19,23 @@ const SignUp = () => {
     }
 
     return (
-        <div className="signup__ctnr">
-            <h1 className="signup__header">Sign Up</h1>
-            <form onSubmit={handleSignUp} className="signup__form-ctnr">
-                    <label for="name" className="signup__label">Username</label>
-                    <input type="text" className="signup__input" name="name" placeholder="Enter your name"></input>
-                    <label for="email" className="signup__label">Email</label>
-                    <input type="text" className="signup__input" name="email" placeholder="Enter your Email Login"></input>
-                    <label for="password" className="signup__label">Password</label>
-                    <input type="password" className="signup__input" name="password" placeholder=""></input>
-                <button type="submit" className="signup__btn">Sign Up!</button>
-            </form>
-            <Link to="/login" className="signup__signup-text">Log In</Link>
-        </div>
+        <>
+        <main className="signup__wrap">
+            <div className="signup__ctnr">
+                <h1 className="signup__header">Sign Up</h1>
+                <form onSubmit={handleSignUp} className="signup__form-ctnr">
+                        <label htmlFor="name" className="signup__label">Username</label>
+                        <input type="text" className="signup__input" name="name" placeholder="Enter your name"></input>
+                        <label htmlFor="email" className="signup__label">Email</label>
+                        <input type="text" className="signup__input" name="email" placeholder="Enter your Email Login"></input>
+                        <label htmlFor="password" className="signup__label">Password</label>
+                        <input type="password" className="signup__input" name="password" placeholder=""></input>
+                    <button type="submit" className="signup__btn">Sign Up!</button>
+                </form>
+                <Link to="/login" className="signup__signup-text">Log In</Link>
+            </div>
+        </main>
+        </>
     )
 }
 
