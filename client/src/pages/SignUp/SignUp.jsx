@@ -32,7 +32,7 @@ const SignUp = () => {
                         <input type="password" className="signup__input" name="password" placeholder=""></input>
                     <button type="submit" className="signup__btn">Sign Up!</button>
                 </form>
-                <Link to="/login" className="signup__signup-text">Log In</Link>
+                <Link to="/login" className="signup__signup-text">Already an Influencer? Log in here instead</Link>
             </div>
         </main>
         </>

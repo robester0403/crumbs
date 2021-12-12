@@ -9,26 +9,31 @@ body {
 
 .signup {
 
-  // &__wrap {
-  //   background: url(../../assets/images/bgimage-dark.jpg);
-  //   background-position: center;
-  //   background-size: cover;
-  //   background-repeat: no-repeat;
-  // }
+  &__wrap {
+    margin: 0 auto;
+    width: 64rem;
+    height: 60rem;
+    background-image: url(../../assets/images/loginsignup.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &__ctnr {
-    margin: 15rem auto;
     width: 26rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: $light-bg-color;
+    background-color: rgba(255, 255, 255, 0.92);
     border-radius: 0.5rem;
     padding: 2rem 1rem;
   } 
 
   &__header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
 
@@ -52,9 +57,11 @@ body {
 
   &__btn {
     @include button;
+    @include dt-bdy-copy-style;
+    background-color: $dark-text-color;
     border: none;
+    font-size: 1.3rem;
     margin: 0 auto;
-    @include dt-bdy-copy-style
   }
 
   &__signup-text{
