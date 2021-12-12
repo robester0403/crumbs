@@ -11,72 +11,118 @@ body {
 }
 .front{
 
+
   &__bg-image {
+    background: none;
+
+    @include tablet {
     background: url(../../assets/images/front-bg-blur-light-dark.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
   }
+}
 
   &__wrap {
     max-width: 64rem;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 .front-aside {
+  display: none;
+
+  @include tablet { 
+    display: inherit;
+  }
+
+    &__wrap {
+      display: none;
+      
+
+      @include tablet { 
+        display: inherit;
+        background-color: rgba(255, 255, 255, 0.90);
+        border-radius: 0.5rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        width: 22rem;
+        margin: auto 5rem
+        }
+      }
+
+
+    &__title {
+      display: none;
+
+      @include tablet { 
+        display: inherit;
+        margin: 2rem 1rem;
+        font-weight: 600;
+        font-size: 2rem;
+        text-align: center;
+        color: $dark-text-color
+      }
+    }
+
+    &__body-text {
+      display: none;
+
+      @include tablet {
+        display: inherit;
+        font-weight: 400;
+        margin: 1rem 1rem;
+        color: $red-text-color;
+        text-align: center;
+      }
+    }
+
+    &__btn-ctnr {
+      display: none;
+
+      @include tablet { 
+          display: inherit;
+        margin: 2rem 0 1rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: textdrop 0.6s;
+      }
+    }
+
+    &__button {
+      display: none;
+
+      @include tablet {
+          display: inherit; 
+        @include button;
+        margin: 1rem 1rem;
+        background-color: $dark-text-color;
+        box-shadow: 2px 2px #888888;
+        cursor: pointer;
+      }
+  }
   
-  &__wrap {
-    background-color: rgba(255, 255, 255, 0.90);
-    border-radius: 0.5rem;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    width: 22rem;
-    margin: auto 5rem
-  }
-
-
-  &__title {
-    margin: 2rem 1rem;
-    font-weight: 600;
-    font-size: 2rem;
-    text-align: center;
-    color: $dark-text-color
-  }
-
-  &__body-text {
-    font-weight: 400;
-    margin: 1rem 1rem;
-    color: $red-text-color;
-    text-align: center;
-  }
-
-  &__btn-ctnr {
-    margin: 2rem 0 1rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: textdrop 0.6s;
-  }
-
-  &__button {
-    @include button;
-    margin: 1rem 1rem;
-    background-color: $dark-text-color;
-    box-shadow: 2px 2px #888888;
-    cursor: pointer;
-  }
 }
 
 .front-phone {
 
   &__wrap{
-  width: 32rem;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+  @include tablet {
+  width: 31rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,6 +132,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   height:60rem;
+  }
   }
 
   &__screen-bg {
@@ -111,8 +158,54 @@ body {
   }
 
   &__youtube-image {
-    object-fit: cover;
+    display: none;
+
+    @include tablet {
+        display: inherit;
+        object-fit: cover;
         width: 100%;
         padding-bottom: 2rem;
+      }
+    }
+
+    &__title {
+      display: inherit;
+      margin: 2rem 1rem;
+      font-weight: 600;
+      font-size: 1.5rem;
+      text-align: center;
+      color: $dark-text-color
+    }
+
+      @include tablet { 
+        display: none;
+      }
+    
+
+  &__btn-ctnr {
+    display: inherit;
+    margin: 2rem 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: textdrop 0.6s;
+
+
+    @include tablet { 
+      display: none;
+    }
   }
+
+  &__button {
+    display: inherit; 
+    @include button;
+    margin: 1rem 1rem;
+    background-color: $dark-text-color;
+    box-shadow: 2px 2px #888888;
+    cursor: pointer;
+
+    @include tablet {
+      display: none;
+    }
+}
 }

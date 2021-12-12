@@ -40,13 +40,27 @@ const FrontPage = () => {
           <section className="front-phone__wrap">
             <div className="front-phone__screen-bg">
               <img className="front-phone__logo" src={logo} alt="Crumbs company logo"/>
-              <div>
                 <img className="front-phone__image" src={frontpageimage1} alt="Map with a vlogger highlighted to the marker" />
-              </div>
-              <div>
                 <img className="front-phone__youtube-image" src={youtubefrontimage} alt="Map with a vlogger highlighted to the marker" />
+                <h1 className="front-phone__title">
+                  Follow the CrumbTrails left by your influencers
+                </h1>
+                <Link to={`/userhome`}>
+                  <h3 className="front-phone__button">
+                    Start Exploring
+                  </h3>
+                </Link>
+                <Link to={`/login`}>
+                  <h3 className="front-phone__button">
+                    Influencer Login
+                  </h3>
+                </Link>
+                <Link to={`/signup`}>
+                  <h3 className="front-phone__button">
+                    Join Us!
+                  </h3>
+                </Link>
               </div>
-            </div>
       
       
           </section>
