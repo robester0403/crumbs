@@ -61,8 +61,6 @@ const FrontPage = () => {
                   </h3>
                 </Link>
               </div>
-      
-      
           </section>
         </main>
     </div>

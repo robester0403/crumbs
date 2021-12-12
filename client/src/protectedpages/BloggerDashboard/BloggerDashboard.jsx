@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 const BloggerDashboard = () => {
 
   let token = sessionStorage.getItem('authToken')
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [influencerOwnInst, setInfluencerOwnInst] = useState(null);
   const [influencerProfileData, setInfluencerProfileData] = useState(null);
   const [yelpSearchData, setYelpSearchData] = useState(null);
@@ -141,9 +141,9 @@ const BloggerDashboard = () => {
                     </h4>
                 </div>
               </article>
-              <article>
+              <article className="dashboard__media-ctnr">
                 <h1 className="dashboard__subheading">
-                  Step 2:Share Your Media
+                  Step 2: Share Your Media
                 </h1>
                 <form className="dashboard__form" onSubmit={handleAddMarkerInstance}>
                     <label className="dashboard__form-lbl" for="medialink">Media Link: Share with Time You Want to Start At</label>
@@ -156,7 +156,7 @@ const BloggerDashboard = () => {
                 </form>
               </article>
             </div>
-            <article className="">
+            <article className="dashboard__instance-ctnr">
         {influencerOwnInst && influencerOwnInst.map(instance => <BloggerInstanceCards
           key={instance.id}
           renderInstance={instance}

@@ -69,7 +69,6 @@ const UserHomePage = () => {
             {...viewport}
             mapStyle="mapbox://styles/robester0403/ckwiiyulp1tc914kz01i19hh3"
             >
-
               {markerArr && markerArr.map((marker) => (
                 <>
                   <Marker 
@@ -79,7 +78,6 @@ const UserHomePage = () => {
                   offsetTop={-viewport.zoom * 5}
                   offsetLeft={-viewport.zoom*2.6}
                   >
-
                     <button className="marker-btn"
                     onClick={(e) => {
                       e.preventDefault();

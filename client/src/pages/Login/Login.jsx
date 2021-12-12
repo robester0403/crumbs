@@ -27,6 +27,12 @@ function LogIn() {
 
     return (
         <>
+            {/* <CSSTransition
+            in={appearLogIn}
+            appear={true}
+            timeout={1000}
+            className="fade"
+            > */}
         <div className='login__wrap'>
             <div className="login__ctnr">
                 <h1 className="login__header">Log In</h1>
@@ -45,6 +51,7 @@ function LogIn() {
                 </Link>
             </div>
         </div>
+        {/* </CSSTransition> */}
         </>
     )} 
 
