@@ -114,7 +114,7 @@ body {
 
 .front-phone {
 
-  &__wrap{
+  &__wrap {
     background: none;
     display: flex;
     align-items: center;
@@ -122,17 +122,17 @@ body {
 
 
   @include tablet {
-  width: 31rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: url(../../assets/images/phone-overlay-white-bg.png);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height:60rem;
-  }
+      width: 31rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: url(../../assets/images/phone-overlay-white-bg.png);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height:60rem;
+    }
   }
 
   &__screen-bg {
@@ -174,13 +174,12 @@ body {
       font-weight: 600;
       font-size: 1.5rem;
       text-align: center;
-      color: $dark-text-color
-    }
-
+      color: $dark-text-color;
+    
       @include tablet { 
         display: none;
       }
-    
+    }
 
   &__btn-ctnr {
     display: inherit;
