@@ -13,9 +13,9 @@ const BloggerDashboard = () => {
   const [yelpSearchData, setYelpSearchData] = useState(null);
   let { userId } = useParams();
 
-  const handleYelpSearch = async (e) => {
+  const handleYelpSearch = (e) => {
     e.preventDefault();
-    await axios.post(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`, 
+    axios.post(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`, 
       {
         term: e.target.searchbizname.value,
         location: e.target.searchbizaddresscity.value
@@ -26,6 +26,9 @@ const BloggerDashboard = () => {
     .then(res =>  
       setYelpSearchData(res.data)
     )
+    .catch(err => {
+      console.log(err);
+    })
   }
 
 
@@ -74,6 +77,17 @@ const BloggerDashboard = () => {
     .then(res =>  
       setInfluencerOwnInst(res.data.instances)
     )
+// see if this works
+    return () => {
+          axios.get(`http://localhost:5000/api/users/loggedin/${userId}/profile`, {headers: { 'Authorization': `Bearer ${token}`}})
+        .then(res =>  
+          setInfluencerProfileData(res.data.profileData)
+        )
+        axios.get(`http://localhost:5000/api/users/loggedin/${userId}`, {headers: { 'Authorization': `Bearer ${token}`}})
+        .then(res =>  
+          setInfluencerOwnInst(res.data.instances)
+        )
+      }
     }
     , [token, userId])
 

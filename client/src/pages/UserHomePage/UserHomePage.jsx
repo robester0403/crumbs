@@ -6,7 +6,11 @@ import ReactMapGL, {Marker, Popup} from "react-map-gl";
 import mapmarker from "../../assets/images/food-icon.png";
 import axios from 'axios';
 
-const UserHomePage = () => {
+// Try to use a window.innerWidth useEffect to change the map width responsiveness
+// https://youtu.be/0ZJgIjIuY7U?t=558
+
+
+export default function UserHomePage () {
   const [markerArr, setMarkerArr] = useState(null);
   const [instancesArr, setInstancesArr] = useState(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -20,25 +24,26 @@ const UserHomePage = () => {
     zoom: 10.5
   });
   
-  const onLoadMarker = async () => {
+  const onLoadMarker = () => {
     // redo this link
-    await axios.get(`http://localhost:5000/api/instancemap/marker/all`)
+    axios.get(`http://localhost:5000/api/instancemap/marker/all`)
     .then(res => {
-      setMarkerArr(res.data.markers)
+      setMarkerArr(res.data.markers);
+      console.log(res);
     })
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
   }
 
-  const onLoadInstance = async () => {
-    await axios.get(`http://localhost:5000/api/instancemap/inst/all`)
+  const onLoadInstance = () => {
+    axios.get(`http://localhost:5000/api/instancemap/inst/all`)
     .then(res => {
-      setInstancesArr(res.data.instances)
+      setInstancesArr(res.data.instances);
     })
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
   }
 
-  const targetInstanceSetter = async (targetBizId) => {
-    await axios.get(`http://localhost:5000/api/instancemap/inst/${targetBizId}`)
+  const targetInstanceSetter = (targetBizId) => {
+    axios.get(`http://localhost:5000/api/instancemap/inst/${targetBizId}`)
     .then(res=> {
       setSelectedInstancesArr(res.data.instances)
     })
@@ -51,11 +56,11 @@ const UserHomePage = () => {
     }
     , [])
 
-    useEffect(() => {
-      onLoadMarker();
-      onLoadInstance()
-      }
-      , [viewport.width])
+  // useEffect(() => {
+  //   onLoadMarker();
+  //   onLoadInstance()
+  //   }
+  //   , [viewport.width])
   
   return (
     <>
@@ -65,7 +70,7 @@ const UserHomePage = () => {
           <section className="userHomePage__map-ctnr">
             <ReactMapGL
             onViewportChange={(newView) => setViewport(newView)}
-            mapboxApiAccessToken={"pk.eyJ1Ijoicm9iZXN0ZXIwNDAzIiwiYSI6ImNrd2loN204ZTE4OGMyc280OHUxNzRpa3EifQ.m2pjCyZdJVLQmPEgO1EJ9w"}
+            mapboxApiAccessToken={process.env.REACT_APP_MB_TKN}
             {...viewport}
             mapStyle="mapbox://styles/robester0403/ckwiiyulp1tc914kz01i19hh3"
             >
@@ -141,6 +146,24 @@ const UserHomePage = () => {
             {selectedVideo && <iframe id="videoframe" width="1024" height="576" src={selectedVideo.mediaLinkUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
           </section>
           <div>
+            <p>
+              Test section
+            </p>
+            <div>
+              {markerArr && markerArr.map((marker, index) => (
+                <>
+                  <div key = {index}>
+                    name: {marker.bizName}
+                  </div>
+                  <div>
+                    <img src={marker.imageUrl} alt={`a day in ${marker.bizname}`}/>
+                  </div>
+                </>
+                ))
+              }
+            </div>
+          </div>
+          <div>
           {
           !selectedInstancesArr ? 
             instancesArr && instancesArr.map(instance => <MapInstanceCards
@@ -161,4 +184,3 @@ const UserHomePage = () => {
   )
 }
 
-export default UserHomePage;

@@ -4,9 +4,7 @@ import avatar from "../../assets/images/avatar.png";
 import playicon from "../../assets/images/play-icon.png";
 
 function MapInstanceCards({renderInstance, selectVideoFunc}) {
-  // We might need to change this
-  const selectTrigger = (e) => {
-    e.preventDefault();
+  const selectTrigger = () => {
     selectVideoFunc(renderInstance);
   };
   return (
