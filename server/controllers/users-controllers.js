@@ -1,54 +1,54 @@
-const { validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const HttpError = require('../models/http-error');
-const User = require('../models/user');
-const Influencer = require('../models/influencer');
-const mongoose = require('mongoose');
-const Marker = require('../models/marker');
-const Instance = require('../models/instance');
-const axios = require('axios');
+const { validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const HttpError = require("../models/http-error");
+const User = require("../models/user");
+const Influencer = require("../models/influencer");
+const mongoose = require("mongoose");
+const Marker = require("../models/marker");
+const Instance = require("../models/instance");
+const axios = require("axios");
 
 // Login and sign up control
 const getUsers = async (req, res, next) => {
   let users;
   try {
-    users = await User.find({}, '-password'); //this is the find funci
+    users = await User.find({}, "-password"); //this is the find funci
   } catch (err) {
     const error = new HttpError(
-      'Fetching users failed, please try again later.',
+      "Fetching users failed, please try again later.",
       500
     );
     // next is just passing the HttpError that we want to tell the user
     return next(error);
   }
-  res.json({ users: users.map(user => user.toObject({ getters: true })) });
+  res.json({ users: users.map((user) => user.toObject({ getters: true })) });
 };
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
-      new HttpError('Invalid inputs passed, please check your data.', 422)
+      new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-// destructure data for doing this
+  // destructure data for doing this
   const { name, email, password } = req.body;
-// see if database actually works
+  // see if database actually works
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email });
   } catch (err) {
     const error = new HttpError(
-      'Signing up failed, please try again later.',
+      "Signing up failed, please try again later.",
       500
     );
     return next(error);
   }
-// find if the user already exists
+  // find if the user already exists
   if (existingUser) {
     const error = new HttpError(
-      'User exists already, please login instead.',
+      "User exists already, please login instead.",
       422
     );
     return next(error);
@@ -59,26 +59,26 @@ const signup = async (req, res, next) => {
     hashedPassword = await bcrypt.hash(password, 12);
   } catch (err) {
     const error = new HttpError(
-      'Could not create user, please try again.',
+      "Could not create user, please try again.",
       500
     );
     return next(error);
   }
 
-// This is where it interacts with the model schema to create a new user database
+  // This is where it interacts with the model schema to create a new user database
   const createdUser = new User({
     name,
     email,
-    password: hashedPassword
+    password: hashedPassword,
   });
 
-createdUser._id
-// See if we can save
+  createdUser._id;
+  // See if we can save
   try {
     await createdUser.save();
   } catch (err) {
     const error = new HttpError(
-      'Signing up failed, please try again later.',
+      "Signing up failed, please try again later.",
       500
     );
     return next(error);
@@ -87,14 +87,14 @@ createdUser._id
   const createdInfluencer = new Influencer({
     name,
     email,
-    userId: createdUser._id.valueOf()
+    userId: createdUser._id.valueOf(),
   });
-// See if we can save
+  // See if we can save
   try {
     await createdInfluencer.save();
   } catch (err) {
     const error = new HttpError(
-      'Signing up failed, please try again later.',
+      "Signing up failed, please try again later.",
       500
     );
     return next(error);
@@ -104,12 +104,12 @@ createdUser._id
   try {
     token = jwt.sign(
       { userId: createdUser.id, email: createdUser.email },
-      'supersecret_dont_share',
-      { expiresIn: '2h' }
+      "supersecret_dont_share",
+      { expiresIn: "2h" }
     );
   } catch (err) {
     const error = new HttpError(
-      'Signing up failed, please try again later.',
+      "Signing up failed, please try again later.",
       500
     );
     return next(error);
@@ -124,33 +124,32 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   let existingUser;
-// try to find a email
+  // try to find a email
   try {
     existingUser = await User.findOne({ email: email });
-  } 
-// if you can't find a email
-    catch (err) {
+  } catch (err) {
+    // if you can't find a email
     const error = new HttpError(
-      'Logging in failed, please try again later.',
+      "Logging in failed, please try again later.",
       500
     );
     return next(error);
   }
-// error for no existing User
+  // error for no existing User
   if (!existingUser) {
     const error = new HttpError(
-      'Invalid credentials, could not log you in.',
+      "Invalid credentials, could not log you in.",
       403
     );
     return next(error);
   }
-// we now use bcrypt to compare entered passwords
+  // we now use bcrypt to compare entered passwords
   let isValidPassword = false;
   try {
     isValidPassword = await bcrypt.compare(password, existingUser.password);
   } catch (err) {
     const error = new HttpError(
-      'Could not log you in, please check your credentials and try again.',
+      "Could not log you in, please check your credentials and try again.",
       500
     );
     return next(error);
@@ -158,7 +157,7 @@ const login = async (req, res, next) => {
 
   if (!isValidPassword) {
     const error = new HttpError(
-      'Invalid credentials, could not log you in.',
+      "Invalid credentials, could not log you in.",
       403
     );
     return next(error);
@@ -168,21 +167,21 @@ const login = async (req, res, next) => {
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      'supersecret_dont_share',
-      { expiresIn: '1h' }
+      "supersecret_dont_share",
+      { expiresIn: "1h" }
     );
   } catch (err) {
     const error = new HttpError(
-      'Logging in failed, please try again later.',
+      "Logging in failed, please try again later.",
       500
     );
     return next(error);
   }
-// Here is the crown jewel where the token is handed over
+  // Here is the crown jewel where the token is handed over
   res.json({
     userId: existingUser.id,
     email: existingUser.email,
-    token: token
+    token: token,
   });
 };
 
@@ -192,58 +191,55 @@ const influencerDBGetOwnInstances = async (req, res, next) => {
 
   let ownInstances;
   try {
-    ownInstances = await Instance.find({ userId:userId });
-    } catch (err) {
-      const error = new HttpError(
-        'Fetching instances error.',
-        500
-      );
-      return next(error);
-    }
-    
-      if (!ownInstances) {
-        return next(
-          new HttpError('Could not find places for the provided user id.', 404)
-        );
-      }
+    ownInstances = await Instance.find({ userId: userId });
+  } catch (err) {
+    const error = new HttpError("Fetching instances error.", 500);
+    return next(error);
+  }
 
-    res.json({
-      instances: ownInstances.map(instance =>
-        instance.toObject({ getters: true })
-      )
-    });
-}
+  if (!ownInstances) {
+    return next(
+      new HttpError("Could not find places for the provided user id.", 404)
+    );
+  }
+
+  res.json({
+    instances: ownInstances.map((instance) =>
+      instance.toObject({ getters: true })
+    ),
+  });
+};
 
 const influencerDBAddMarkerInstance = async (req, res, next) => {
   const errors = validationResult(req);
   // stop here if errors in req
   if (!errors.isEmpty()) {
     return next(
-      new HttpError('Invalid inputs passed, please check your data.', 422)
+      new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
 
-  const { 
-      bizId,
-      bizName,
-      imageUrl,
-      address1,
-      address2,
-      address3,
-      city,
-      country,
-      state,
-      phone,
-      latitude,
-      longitude,
-      userId,
-      name,
-      mediaLinkUrl,
-      mediaEmbed,
-      price,
-      rating,
-      url,
-      reviewCount,
+  const {
+    bizId,
+    bizName,
+    imageUrl,
+    address1,
+    address2,
+    address3,
+    city,
+    country,
+    state,
+    phone,
+    latitude,
+    longitude,
+    userId,
+    name,
+    mediaLinkUrl,
+    mediaEmbed,
+    price,
+    rating,
+    url,
+    reviewCount,
   } = req.body;
 
   let existingMarker = await Marker.findOne({ bizId: bizId });
@@ -271,80 +267,74 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
       createdMarker.save();
     } catch (err) {
       const error = new HttpError(
-        'Signing up failed, please try again later.',
+        "Signing up failed, please try again later.",
         500
       );
       return next(error);
     }
   }
 
-// ===== code up to here is working
-    let existingInstance;
-    try {
-      existingInstance = await Instance.findOne({ bizId: bizId, userId: userId });
-    } catch (err) {
-      const error = new HttpError(
-        'Add Instance failed.',
-        500
-      );
-      return next(error);
-    }
-  
-    if (existingInstance) {
-      const error = new HttpError(
-        'Instance for this location exists already, please update your instance instead.',
-        422
-      );
-      return next(error);
-    }
-  
-    const createdInstance = new Instance({
-      bizId,
-      bizName,
-      userId,
-      name,
-      address1,
-      address2,
-      address3,
-      city,
-      country,
-      state,
-      mediaLinkUrl,
-      mediaEmbed,
-      phone
-    });
-  
-    try {
-      await createdInstance.save();
-    } catch (err) {
-      const error = new HttpError(
-        'Signing up failed, please try again later.',
-        500
-      );
-      return next(error);
-    }
-  // this is just a object we send back to the front as confirmation. Don't know if we need it.
-    res.status(201).json({ instance: createdInstance });
+  // ===== code up to here is working
+  let existingInstance;
+  try {
+    existingInstance = await Instance.findOne({ bizId: bizId, userId: userId });
+  } catch (err) {
+    const error = new HttpError("Add Instance failed.", 500);
+    return next(error);
   }
+
+  if (existingInstance) {
+    const error = new HttpError(
+      "Instance for this location exists already, please update your instance instead.",
+      422
+    );
+    return next(error);
+  }
+
+  const createdInstance = new Instance({
+    bizId,
+    bizName,
+    userId,
+    name,
+    address1,
+    address2,
+    address3,
+    city,
+    country,
+    state,
+    mediaLinkUrl,
+    mediaEmbed,
+    phone,
+  });
+
+  try {
+    await createdInstance.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Signing up failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+  // this is just a object we send back to the front as confirmation. Don't know if we need it.
+  res.status(201).json({ instance: createdInstance });
+};
 
 const influencerSearchYelp = async (req, res, next) => {
-  const { 
-    term,
-    location
-  } = req.body;
+  const { term, location } = req.body;
 
-  const queryterm = `term=` + `${term}`
-  const querylocation = `location=` + `${location}`
+  const queryterm = `term=` + `${term}`;
+  const querylocation = `location=` + `${location}`;
 
-  await axios.get(
-    `https://api.yelp.com/v3/businesses/search?${queryterm}&${querylocation}&limit=1`,
+  await axios
+    .get(
+      `https://api.yelp.com/v3/businesses/search?${queryterm}&${querylocation}&limit=1`,
       {
-        headers: 
-        { 'Authorization': 'Bearer ' + process.env.YELP_URI }
+        headers: { Authorization: "Bearer " + process.env.YELP_URI },
       }
     )
     .then((response) => {
-      console.log(response.data.businesses[0].image_url)
+      console.log(response.data.businesses[0].image_url);
       res.send({
         bizId: response.data.businesses[0].id,
         bizName: response.data.businesses[0].name,
@@ -361,38 +351,33 @@ const influencerSearchYelp = async (req, res, next) => {
         price: response.data.businesses[0].price,
         rating: response.data.businesses[0].rating,
         url: response.data.businesses[0].url,
-        reviewCount: response.data.businesses[0].review_count
-      })
+        reviewCount: response.data.businesses[0].review_count,
+      });
     })
     .catch((err) => {
-      console.log('failed to grab user devices');
+      console.log("failed to grab user devices");
     });
-    
-}
-
+};
 
 const influencerDBGetProfile = async (req, res, next) => {
   const influencerId = await req.params.userId;
 
   let profileData;
   try {
-    profileData = await Influencer.findOne({ userId:influencerId });
-      } catch (err) {
-        const error = new HttpError(
-          'Fetching instances error.',
-          500
-        );
-        return next(error);
-      }
-    
-      if (!profileData) {
-        return next(
-          new HttpError('Could not find places for the provided user id.', 404)
-        );
-      }
+    profileData = await Influencer.findOne({ userId: influencerId });
+  } catch (err) {
+    const error = new HttpError("Fetching instances error.", 500);
+    return next(error);
+  }
 
-    res.json({ profileData: profileData.toObject({ getters: true }) })
-}
+  if (!profileData) {
+    return next(
+      new HttpError("Could not find places for the provided user id.", 404)
+    );
+  }
+
+  res.json({ profileData: profileData.toObject({ getters: true }) });
+};
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
