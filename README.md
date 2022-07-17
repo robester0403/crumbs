@@ -7,8 +7,6 @@ Crumbs is an app that allows influencer to map their videos so that nearby viewe
 npm "cd client && npm i" & "cd server && npm i"
 npm "cd client && npm start" & "cd server && npm start"
 
-## Usage
-
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

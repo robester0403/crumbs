@@ -4,9 +4,7 @@ import avatar from "../../assets/images/avatar.png";
 import playicon from "../../assets/images/play-icon.png";
 
 function MapInstanceCards({renderInstance, selectVideoFunc}) {
-  // We might need to change this
-  const selectTrigger = (e) => {
-    e.preventDefault();
+  const selectTrigger = () => {
     selectVideoFunc(renderInstance);
   };
   return (
@@ -19,7 +17,7 @@ function MapInstanceCards({renderInstance, selectVideoFunc}) {
           <h4 className="instance-card__influencer">
             {renderInstance.name}
           </h4>
-          <h4 className="">
+          <h4 className="instance-card__bizname">
             {renderInstance.bizName}
           </h4>
         </div>

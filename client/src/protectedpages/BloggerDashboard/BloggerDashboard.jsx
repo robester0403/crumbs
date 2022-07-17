@@ -7,17 +7,15 @@ import React, { useState, useEffect } from "react";
 const BloggerDashboard = () => {
 
   let token = sessionStorage.getItem('authToken')
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [influencerOwnInst, setInfluencerOwnInst] = useState(null);
   const [influencerProfileData, setInfluencerProfileData] = useState(null);
   const [yelpSearchData, setYelpSearchData] = useState(null);
-// use params give you access to URL params on the http address. the params being the same in the URL
   let { userId } = useParams();
 
-  const handleYelpSearch = async (e) => {
+  const handleYelpSearch = (e) => {
     e.preventDefault();
-    console.log(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`);
-    await axios.post(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`, 
+    axios.post(`http://localhost:5000/api/users/loggedin/${userId}/searchYelp`, 
       {
         term: e.target.searchbizname.value,
         location: e.target.searchbizaddresscity.value
@@ -28,6 +26,9 @@ const BloggerDashboard = () => {
     .then(res =>  
       setYelpSearchData(res.data)
     )
+    .catch(err => {
+      console.log(err);
+    })
   }
 
 
@@ -63,6 +64,7 @@ const BloggerDashboard = () => {
       }
     )
     .then( 
+      window.location.reload(false)
     )
   }
 
@@ -75,6 +77,17 @@ const BloggerDashboard = () => {
     .then(res =>  
       setInfluencerOwnInst(res.data.instances)
     )
+// see if this works
+    return () => {
+          axios.get(`http://localhost:5000/api/users/loggedin/${userId}/profile`, {headers: { 'Authorization': `Bearer ${token}`}})
+        .then(res =>  
+          setInfluencerProfileData(res.data.profileData)
+        )
+        axios.get(`http://localhost:5000/api/users/loggedin/${userId}`, {headers: { 'Authorization': `Bearer ${token}`}})
+        .then(res =>  
+          setInfluencerOwnInst(res.data.instances)
+        )
+      }
     }
     , [token, userId])
 
@@ -105,7 +118,6 @@ const BloggerDashboard = () => {
         </main>  
         <main className="dashboard">
             <div className="dashboard__forms-ctnr">
-              {/* Can be condensed into a Yelp Component */}
               <article className="dashboard__yelp-ctnr">
                 <h1 className="dashboard__subheading">
                   Create a new CrumbTrail!
@@ -126,8 +138,6 @@ const BloggerDashboard = () => {
                     </button>
                   </form>
                   <div className="dashboard__subheading">
-                    {/* In the future add be the first to post here logic */}
-                    {/* Maybe make entire section conditional */}
                     <h3 className="dashboard__subheading">
                       Yelp Search Results
                     </h3>
@@ -145,10 +155,9 @@ const BloggerDashboard = () => {
                     </h4>
                 </div>
               </article>
-              {/* Can be condensed into a MarkInst Component */}
-              <article>
+              <article className="dashboard__media-ctnr">
                 <h1 className="dashboard__subheading">
-                  Step 2:Share Your Media
+                  Step 2: Share Your Media
                 </h1>
                 <form className="dashboard__form" onSubmit={handleAddMarkerInstance}>
                     <label className="dashboard__form-lbl" for="medialink">Media Link: Share with Time You Want to Start At</label>
@@ -161,7 +170,7 @@ const BloggerDashboard = () => {
                 </form>
               </article>
             </div>
-            <article className="">
+            <article className="dashboard__instance-ctnr">
         {influencerOwnInst && influencerOwnInst.map(instance => <BloggerInstanceCards
           key={instance.id}
           renderInstance={instance}

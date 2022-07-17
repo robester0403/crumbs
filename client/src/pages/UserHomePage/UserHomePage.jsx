@@ -1,185 +1,222 @@
-import './UserHomePage.scss';
+import "./UserHomePage.scss";
 import Header from "../../components/Header/Header";
-import MapInstanceCards from '../../components/MapInstanceCards/MapInstanceCards';
+import MapInstanceCards from "../../components/MapInstanceCards/MapInstanceCards";
 import React, { useState, useEffect } from "react";
-import ReactMapGL, {Marker, Popup} from "react-map-gl";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import mapmarker from "../../assets/images/food-icon.png";
-import axios from 'axios';
+import axios from "axios";
 
+// Try to use a window.innerWidth useEffect to change the map width responsiveness
+// https://youtu.be/0ZJgIjIuY7U?t=558
 
-
-const UserHomePage = () => {
-  
-  // Restaurant array is the marker array for now
+export default function UserHomePage() {
   const [markerArr, setMarkerArr] = useState(null);
   const [instancesArr, setInstancesArr] = useState(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [selectedInstancesArr, setSelectedInstancesArr] = useState(null);
-  // selectedVideo is set in the cards
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 43.65845826670497,
     longitude: -79.385555,
     width: "64rem",
     height: "50vh",
-    zoom: 9
+    zoom: 10.5,
   });
-  
-  
-  const onLoadMarker = async () => {
+
+  const onLoadMarker = () => {
     // redo this link
-    await axios.get(`http://localhost:5000/api/instancemap/marker/all`)
-    .then(res => {
-      setMarkerArr(res.data.markers)
-    })
-    // .catch(error => console.log(error))
-  }
+    axios
+      .get(`http://localhost:5000/api/instancemap/marker/all`)
+      .then((res) => {
+        setMarkerArr(res.data.markers);
+        console.log(res);
+      })
+      .catch((error) => console.log(error));
+  };
 
-  const onLoadInstance = async () => {
-    // redo this link
-    await axios.get(`http://localhost:5000/api/instancemap/inst/all`)
-    .then(res => {
-      setInstancesArr(res.data.instances)
-    })
-    .catch(error => console.log(error))
-  }
+  const onLoadInstance = () => {
+    axios
+      .get(`http://localhost:5000/api/instancemap/inst/all`)
+      .then((res) => {
+        setInstancesArr(res.data.instances);
+      })
+      .catch((error) => console.log(error));
+  };
 
-  const targetInstanceSetter = async (targetBizId) => {
-
-    await axios.get(`http://localhost:5000/api/instancemap/inst/${targetBizId}`)
-    .then(res=> {
-      setSelectedInstancesArr(res.data.instances)
-
-    })
-    .catch(error => console.log(error))
-  }
+  const targetInstanceSetter = (targetBizId) => {
+    axios
+      .get(`http://localhost:5000/api/instancemap/inst/${targetBizId}`)
+      .then((res) => {
+        setSelectedInstancesArr(res.data.instances);
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     onLoadMarker();
     onLoadInstance();
-    }
-    , [])
+  }, []);
 
-    useEffect(() => {
-      onLoadMarker();
-      onLoadInstance()
-      }
-      , [viewport.width])
-  
+  // useEffect(() => {
+  //   onLoadMarker();
+  //   onLoadInstance()
+  //   }
+  //   , [viewport.width])
+
   return (
     <>
       <div className="userHomePage__wrap">
-        <main >
-        <Header/>
+        <main>
+          <Header />
           <section className="userHomePage__map-ctnr">
             <ReactMapGL
-            onViewportChange={(newView) => setViewport(newView)}
-            // move this to env later
-            mapboxApiAccessToken={"pk.eyJ1Ijoicm9iZXN0ZXIwNDAzIiwiYSI6ImNrd2loN204ZTE4OGMyc280OHUxNzRpa3EifQ.m2pjCyZdJVLQmPEgO1EJ9w"}
-            {...viewport}
-            mapStyle="mapbox://styles/robester0403/ckwiiyulp1tc914kz01i19hh3"
+              onViewportChange={(newView) => setViewport(newView)}
+              mapboxApiAccessToken={process.env.REACT_APP_MB_TKN}
+              {...viewport}
+              mapStyle="mapbox://styles/robester0403/ckwiiyulp1tc914kz01i19hh3"
             >
-              {/* !1! you click on the map */}
-              {/* the arr exists. The map  is mapping undefined, meaning the data is not there the right way? because it is mapping 4 entries */}
-              {markerArr && markerArr.map((marker) => (
-                <>
-                  <Marker 
-                  key={ marker.id }
-                  latitude= {parseFloat(marker.latitude.$numberDecimal)}
-                  longitude={parseFloat(marker.longitude.$numberDecimal)}
-                  offsetTop={-viewport.zoom * 5}
-                  offsetLeft={-viewport.zoom*2.6}
-                  >
-                    {/* !2! onClick sets the marker for popup and instances */}
-                    <button className="marker-btn"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setSelectedMarker(marker);
-                      // This is the logic for the set setSelectedInstancesArr function we need all the instances with that go with this instance so we are going to need to call it axios
-                      targetInstanceSetter(marker.bizId)
-                      }
-                    }>
-                      <img width={viewport.zoom*3.5} height={viewport.zoom*3.5} src={mapmarker} alt="station marker"/>
-                    </button>
-                  </Marker>
-                </>
-              ))
-              };
-            {selectedMarker ? (
-                // 3B Close removes the marker and 
-                <Popup className="popup"
-                latitude={parseFloat(selectedMarker.latitude.$numberDecimal)}
-                longitude={parseFloat(selectedMarker.longitude.$numberDecimal)}
-                onClose={() => {
-                  setSelectedMarker(null)
-                  setSelectedInstancesArr(null)
-                  setSelectedVideo(null)
-                  }}>
+              {markerArr &&
+                markerArr.map((marker) => (
+                  <>
+                    <Marker
+                      key={marker.id}
+                      latitude={parseFloat(marker.latitude.$numberDecimal)}
+                      longitude={parseFloat(marker.longitude.$numberDecimal)}
+                      offsetTop={-viewport.zoom * 5}
+                      offsetLeft={-viewport.zoom * 2.6}
+                    >
+                      <button
+                        className="marker-btn"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSelectedMarker(marker);
+                          targetInstanceSetter(marker.bizId);
+                        }}
+                      >
+                        <img
+                          width={viewport.zoom * 3.5}
+                          height={viewport.zoom * 3.5}
+                          src={mapmarker}
+                          alt="station marker"
+                        />
+                      </button>
+                    </Marker>
+                  </>
+                ))}
+              {selectedMarker ? (
+                <Popup
+                  className="popup"
+                  latitude={parseFloat(selectedMarker.latitude.$numberDecimal)}
+                  longitude={parseFloat(
+                    selectedMarker.longitude.$numberDecimal
+                  )}
+                  onClose={() => {
+                    setSelectedMarker(null);
+                    setSelectedInstancesArr(null);
+                    setSelectedVideo(null);
+                  }}
+                >
                   <article className="popup">
-                    <h3 className="popup__header">
-                      {selectedMarker.bizName}
-                    </h3>
+                    <h3 className="popup__header">{selectedMarker.bizName}</h3>
                     <h4 className="popup__sub-ctnr">
                       <div className="popup__body">
-                        <span className="popup__body-bold">{selectedMarker.rating}</span>/5 Crumbs, Price: <span className="popup__body-bold">{selectedMarker.price}</span>
+                        <span className="popup__body-bold">
+                          {selectedMarker.rating}
+                        </span>
+                        /5 Crumbs, Price:{" "}
+                        <span className="popup__body-bold">
+                          {selectedMarker.price}
+                        </span>
                       </div>
                       <div className="popup__weblink">
-                        <a href={selectedMarker.url} alt="Website Link" target='_blank' rel="noreferrer"> Website Link</a>
+                        <a
+                          href={selectedMarker.url}
+                          alt="Website Link"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {" "}
+                          Website Link
+                        </a>
                       </div>
                     </h4>
                     <h4 className="popup__body">
-                      {selectedMarker.address1} {selectedMarker.address2} {selectedMarker.address3}, {selectedMarker.city}, {selectedMarker.state}, {selectedMarker.country}
+                      {selectedMarker.address1} {selectedMarker.address2}{" "}
+                      {selectedMarker.address3}, {selectedMarker.city},{" "}
+                      {selectedMarker.state}, {selectedMarker.country}
                     </h4>
-                      <div className="popup__body">
-                        {selectedMarker.phone}
-                      </div>
+                    <div className="popup__body">{selectedMarker.phone}</div>
                     <div className="popup__img-ctnr">
-                      <img className="popup__img" src={selectedMarker.imageUrl} alt={selectedMarker.bizName} />
+                      <img
+                        className="popup__img"
+                        src={selectedMarker.imageUrl}
+                        alt={selectedMarker.bizName}
+                      />
                     </div>
                     <div className="popup__btn-ctnr">
-                        <a href="https://www.ubereats.com/" alt="UberEats link" className="popup__uber-btn">
-                          Order UberEats
-                        </a>
-                        <a href="https://www.opentable.com/" alt="Opentable link" className="popup__otable-btn">
-                          OpenTable
-                        </a>
-                        <a href="https://www.google.com/maps" alt="GoogleMaps link" className="popup__direct-btn">
-                          Directions
-                        </a>
+                      <a
+                        href="https://www.ubereats.com/"
+                        alt="UberEats link"
+                        className="popup__uber-btn"
+                      >
+                        Order UberEats
+                      </a>
+                      <a
+                        href="https://www.opentable.com/"
+                        alt="Opentable link"
+                        className="popup__otable-btn"
+                      >
+                        OpenTable
+                      </a>
+                      <a
+                        href="https://www.google.com/maps"
+                        alt="GoogleMaps link"
+                        className="popup__direct-btn"
+                      >
+                        Directions
+                      </a>
                     </div>
                   </article>
                 </Popup>
-              ): null}  
+              ) : null}
             </ReactMapGL>
           </section>
           <section>
-            {/* enter the mediaURL later. also an if statement that if there is no mediaURL then it will not appear */}
-
-            {selectedVideo && <iframe width="1024" height="576" src={selectedVideo.mediaLinkUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
+            {selectedVideo && (
+              <iframe
+                id="videoframe"
+                width="1024"
+                height="576"
+                src={selectedVideo.mediaLinkUrl}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            )}
           </section>
-          <div>
 
-  {/* the below is if there is no selected marker instance arg, then render all instance.  */}
-          {
-          !selectedInstancesArr ? 
-            instancesArr && instancesArr.map(instance => <MapInstanceCards
-                key={instance.id}
-                renderInstance={instance}
-                selectVideoFunc={setSelectedVideo}
-              />) 
-              :  
-              // If there is then render the selected
-              selectedInstancesArr && selectedInstancesArr.map(instance => <MapInstanceCards
-                key={instance.id}
-                renderInstance={instance}
-                selectVideoFunc={setSelectedVideo}
-              />)}
-          
+          <div>
+            {!selectedInstancesArr
+              ? instancesArr &&
+                instancesArr.map((instance) => (
+                  <MapInstanceCards
+                    key={instance.id}
+                    renderInstance={instance}
+                    selectVideoFunc={setSelectedVideo}
+                  />
+                ))
+              : selectedInstancesArr &&
+                selectedInstancesArr.map((instance) => (
+                  <MapInstanceCards
+                    key={instance.id}
+                    renderInstance={instance}
+                    selectVideoFunc={setSelectedVideo}
+                  />
+                ))}
           </div>
         </main>
       </div>
     </>
-  )
+  );
 }
-
-export default UserHomePage;

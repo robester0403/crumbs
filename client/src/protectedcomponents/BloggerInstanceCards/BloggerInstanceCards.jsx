@@ -2,7 +2,7 @@
 import './BloggerInstanceCards.scss';
 
 function BloggerInstanceCards({renderInstance}) {
-  // We might need to change this
+
 
   return (
     <>
