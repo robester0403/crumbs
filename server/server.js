@@ -16,18 +16,18 @@ app.use("/uploads/images", express.static(path.join("uploads", "images")));
 app.use("/api/instancemap", instanceMapRoutes);
 app.use("/api/users", usersRoutes);
 
-app.use((error, req, res, next) => {
-  if (req.file) {
-    fs.unlink(req.file.path, (err) => {
-      console.log(err);
-    });
-  }
-  if (res.headerSent) {
-    return next(error);
-  }
-  res.status(error.code || 500);
-  res.json({ message: error.message || "An unknown error occurred!" });
-});
+// app.use((error, req, res, next) => {
+//   if (req.file) {
+//     fs.unlink(req.file.path, (err) => {
+//       console.log(err);
+//     });
+//   }
+//   if (res.headerSent) {
+//     return next(error);
+//   }
+//   res.status(error.code || 500);
+//   res.json({ message: error.message || "An unknown error occurred!" });
+// });
 
 require("dotenv").config();
 const port = process.env.PORT || 5000;
