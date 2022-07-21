@@ -1,11 +1,6 @@
-const { validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { v4: uuidv4 } = require("uuid");
 const HttpError = require("../models/http-error");
 const Instance = require("../models/instance");
 const Marker = require("../models/marker");
-const mongoose = require("mongoose");
 
 // this is a get all for demo purposes
 const getAllInstances = async (req, res, next) => {

@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
 const Influencer = require("../models/influencer");
-const mongoose = require("mongoose");
 const Marker = require("../models/marker");
 const Instance = require("../models/instance");
 const axios = require("axios");
@@ -243,6 +242,7 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
   } = req.body;
 
   let existingMarker = await Marker.findOne({ bizId: bizId });
+  // this is where you designate it as a new marker
   const createdMarker = new Marker({
     bizId,
     bizName,
