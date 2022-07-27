@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.43932ac6.chunk.css",
+    "main.js": "/static/js/main.252a45f6.chunk.js",
+    "main.js.map": "/static/js/main.252a45f6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.776c1e0d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.776c1e0d.js.map",
+    "static/js/2.ca337425.chunk.js": "/static/js/2.ca337425.chunk.js",
+    "static/js/2.ca337425.chunk.js.map": "/static/js/2.ca337425.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.43932ac6.chunk.css.map": "/static/css/main.43932ac6.chunk.css.map",
+    "static/js/2.ca337425.chunk.js.LICENSE.txt": "/static/js/2.ca337425.chunk.js.LICENSE.txt",
+    "static/media/BloggerDashboard.scss": "/static/media/Roboto-ThinItalic.026cbce1.ttf",
+    "static/media/food-icon.eaec3e1e.png": "/static/media/food-icon.eaec3e1e.png",
+    "static/media/FrontPage.scss": "/static/media/phone-overlay-white-bg.279f8d26.png",
+    "static/media/frontpageimage1.04bb2cc4.JPG": "/static/media/frontpageimage1.04bb2cc4.JPG",
+    "static/media/SignUp.scss": "/static/media/loginsignup.bda5b77f.png",
+    "static/media/logo-transparent.49d1eee4.png": "/static/media/logo-transparent.49d1eee4.png",
+    "static/media/logo2.c2c7d6f1.png": "/static/media/logo2.c2c7d6f1.png",
+    "static/media/play-icon.4f716fb1.png": "/static/media/play-icon.4f716fb1.png",
+    "static/media/youtubefrontimage.5b4ada24.JPG": "/static/media/youtubefrontimage.5b4ada24.JPG"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.776c1e0d.js",
+    "static/js/2.ca337425.chunk.js",
+    "static/css/main.43932ac6.chunk.css",
+    "static/js/main.252a45f6.chunk.js"
+  ]
+}
