@@ -1,5 +1,3 @@
-const fs = require("fs");
-const path = require("path");
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -38,5 +36,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+if (process.env.NODE_ENV === "production") {
+}
 
 app.listen(PORT, console.log(`Connected to Port ${PORT}`));
