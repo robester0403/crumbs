@@ -177,7 +177,7 @@ const login = async (req, res, next) => {
     return next(error);
   }
   // Here is the crown jewel where the token is handed over
-  res.json({
+  res.status(200).json({
     userId: existingUser.id,
     email: existingUser.email,
     token: token,
