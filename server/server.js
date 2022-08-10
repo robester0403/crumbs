@@ -1,14 +1,19 @@
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
-
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const path = require("path");
 const instanceMapRoutes = require("./routes/instance-map-routes");
 const usersRoutes = require("./routes/users-routes");
 
 const app = express();
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
