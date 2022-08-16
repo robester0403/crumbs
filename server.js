@@ -12,7 +12,6 @@ const app = express();
 
 // refactor this into a new file
 require("dotenv").config();
-const PORT = process.env.PORT || 8080;
 
 mongoose
   .connect(process.env.ATLAS_URI, {
@@ -54,4 +53,4 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(_dirname, "/client/build")));
 }
 
-app.listen(PORT, console.log(`Connected to Port ${PORT}`));
+app.listen(process.env.PORT || 5000, console.log(`Connected to Port ${PORT}`));
