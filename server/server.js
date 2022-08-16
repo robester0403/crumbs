@@ -51,7 +51,7 @@ app.use("/api/users", usersRoutes);
 // });
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static(path.join(_dirname, "/../client/build")));
 }
 
 app.listen(PORT, console.log(`Connected to Port ${PORT}`));
