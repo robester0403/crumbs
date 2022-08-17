@@ -71,7 +71,9 @@ export default function UserHomePage() {
           <section className="userHomePage__map-ctnr">
             <ReactMapGL
               onViewportChange={(newView) => setViewport(newView)}
-              mapboxApiAccessToken={process.env.REACT_APP_MB_TKN}
+              mapboxApiAccessToken={
+                "pk.eyJ1Ijoicm9iZXN0ZXIwNDAzIiwiYSI6ImNrd2loN204ZTE4OGMyc280OHUxNzRpa3EifQ.m2pjCyZdJVLQmPEgO1EJ9w"
+              }
               {...viewport}
               mapStyle="mapbox://styles/robester0403/ckwiiyulp1tc914kz01i19hh3"
             >
