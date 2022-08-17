@@ -29,7 +29,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 app.use(morgan("combined"));
 
@@ -49,7 +48,7 @@ if (process.env.NODE_ENV === "production") {
     response.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
-
-app.listen(process.env.PORT || 5000, () => {
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });
