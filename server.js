@@ -7,6 +7,7 @@ const path = require("path");
 const instanceMapRoutes = require("./routes/instance-map-routes");
 const usersRoutes = require("./routes/users-routes");
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -24,7 +25,8 @@ mongoose
 
 app.use(cors({ credentials: true, origin: true }));
 app.use(logger("combined"));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //
@@ -37,15 +39,15 @@ app.use("/api/instancemap", instanceMapRoutes);
 app.use("/api/users", usersRoutes);
 
 // Step 1:
-app.use(express.static(path.join(__dirname, "client", "build")));
 // Step 2:
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
 
 if (process.env.NODE_ENV === "production") {
-  app.use("*", express.static(path.join(__dirname, "client", "build")));
+  app.use(express.static(path.resolve(__dirname, "client", "build")));
+  app.get("*", (_, response) => {
+    response.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 }
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
