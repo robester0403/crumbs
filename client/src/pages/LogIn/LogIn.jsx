@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import "./LogIn.scss";
 import { useForm } from "react-hook-form";
+import { API_URL } from "../../../config/config";
 
 function LogIn() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function LogIn() {
 
   const submitSend = (e) => {
     axios
-      .post("http://localhost:5000/api/users/login", {
+      .post(API_URL + "/api/users/login", {
         email: e.email,
         password: e.password,
       })

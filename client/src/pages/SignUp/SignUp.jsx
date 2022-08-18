@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../../../config/config";
 import "./SignUp.scss";
 
 const SignUp = () => {
@@ -8,7 +9,7 @@ const SignUp = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/users/signup", {
+      .post(API_URL + "/api/users/signup", {
         name: e.target.name.value,
         email: e.target.email.value,
         password: e.target.password.value,

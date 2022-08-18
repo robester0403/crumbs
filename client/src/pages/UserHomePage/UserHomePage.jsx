@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import mapmarker from "../../assets/images/food-icon.png";
 import axios from "axios";
+import { API_URL } from "../../../config/config";
 
 // Try to use a window.innerWidth useEffect to change the map width responsiveness
 // https://youtu.be/0ZJgIjIuY7U?t=558
@@ -26,7 +27,7 @@ export default function UserHomePage() {
   const onLoadMarker = () => {
     // redo this link
     axios
-      .get(`http://localhost:5000/api/instancemap/marker/all`)
+      .get(API_URL + `/api/instancemap/marker/all`)
       .then((res) => {
         setMarkerArr(res.data.markers);
         console.log(res);
@@ -36,7 +37,7 @@ export default function UserHomePage() {
 
   const onLoadInstance = () => {
     axios
-      .get(`http://localhost:5000/api/instancemap/inst/all`)
+      .get(API_URL + `/api/instancemap/inst/all`)
       .then((res) => {
         setInstancesArr(res.data.instances);
       })
@@ -45,7 +46,7 @@ export default function UserHomePage() {
 
   const targetInstanceSetter = (targetBizId) => {
     axios
-      .get(`http://localhost:5000/api/instancemap/inst/${targetBizId}`)
+      .get(API_URL + `/api/instancemap/inst/${targetBizId}`)
       .then((res) => {
         setSelectedInstancesArr(res.data.instances);
       })
@@ -56,12 +57,6 @@ export default function UserHomePage() {
     onLoadMarker();
     onLoadInstance();
   }, []);
-
-  // useEffect(() => {
-  //   onLoadMarker();
-  //   onLoadInstance()
-  //   }
-  //   , [viewport.width])
 
   return (
     <>
