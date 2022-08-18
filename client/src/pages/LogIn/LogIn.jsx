@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import "./LogIn.scss";
 import { useForm } from "react-hook-form";
-import { API_URL } from "../../../config/config";
+import { API_URL } from "../../config/config";
 
 function LogIn() {
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import mapmarker from "../../assets/images/food-icon.png";
 import axios from "axios";
-import { API_URL } from "../../../config/config";
+import { API_URL } from "../../config/config";
 
 // Try to use a window.innerWidth useEffect to change the map width responsiveness
 // https://youtu.be/0ZJgIjIuY7U?t=558
