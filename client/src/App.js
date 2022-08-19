@@ -3,7 +3,8 @@ import FrontPage from "./pages/FrontPage/FrontPage";
 import UserHomePage from "./pages/UserHomePage/UserHomePage";
 import LogIn from "./pages/LogIn/LogIn";
 import SignUp from "./pages/SignUp/SignUp";
-import BloggerDashboard from "./protectedpages/BloggerDashboard/BloggerDashboard";
+import BloggerDashboard from "./pages/BloggerDashboard/BloggerDashboard";
+
 // import BloggerEditProfile from "./protectedpages/BloggerEditProfile/BloggerEditProfile";
 
 document.title = "Crumbs: blogger mapper experience";

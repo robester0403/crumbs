@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import BloggerInstanceCards from "../../protectedcomponents/BloggerInstanceCards/BloggerInstanceCards";
 import "./BloggerDashboard.scss";
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../../config/config";
+import BloggerInstanceCards from "../../components/BloggerInstanceCards/BloggerInstanceCards";
 
 const BloggerDashboard = () => {
   let token = sessionStorage.getItem("authToken");
