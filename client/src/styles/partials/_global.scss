@@ -3,11 +3,10 @@
 @use "mixins" as *;
 
 body {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: hsl(60, 11%, 95%);
+  color: $dark-text-color;
   font-family: $font-stack;
   margin: 0;
-
 }
 
 h1 {
@@ -24,7 +23,6 @@ h4 {
 
 h5 {
   margin: 0;
-
 }
 
 a {

@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import "./LogIn.scss";
 import { useForm } from "react-hook-form";
 import { API_URL } from "../../config/config";
+import styled from "styled-components";
+import backgroundImg from "../../assets/images/loginsignup.png";
 
 function LogIn() {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ function LogIn() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { email: "Enter email here" } });
+  } = useForm();
   // eslint-disable-next-line no-unused-vars
   const [bloggerDetArr, setBloggerDetArr] = useState(null);
 
@@ -34,53 +36,109 @@ function LogIn() {
 
   return (
     <>
-      <div className="login__wrap">
-        <div className="login__ctnr">
-          <h1 className="login__header">Log In</h1>
-          <form
+      <MainWrapper>
+        <LogInContainer>
+          <LoginHeader>Log In</LoginHeader>
+          <LoginFormContainer
             onSubmit={handleSubmit((e) => {
               return submitSend(e);
             })}
-            className="login__form-ctnr"
           >
-            <label htmlFor="email" className="login__label">
+            <LoginFormLabel htmlFor="email" className="login__label">
               Email
-            </label>
-            <input
+            </LoginFormLabel>
+            <InputField
               {...register("email", { required: "this is required" })}
-              className="login__input"
-            ></input>
-            <div>{errors.email?.message}</div>
-            <label htmlFor="password" className="login__label">
+            />
+            <ErrorMessage>{errors.email?.message}</ErrorMessage>
+            <LoginFormLabel htmlFor="password" className="login__label">
               Password
-            </label>
-            <input
+            </LoginFormLabel>
+            <InputField
               type="password"
               {...register("password", {
-                required: "this is required",
+                required: "*Email is required",
                 minLength: {
                   value: 4,
-                  message: "must be more than 4 characters",
+                  message: "Must be more than 4 characters",
                 },
               })}
               className="login__input"
-            ></input>
-            <div>{errors.password?.message}</div>
+            />
+            <ErrorMessage>{errors.password?.message}</ErrorMessage>
             <button type="submit" className="login__btn">
               Log In
             </button>
-          </form>
-          <Link to="/signup" className="login__signup-text">
-            New to Crumbs? Join Now!
-          </Link>
-          <Link to="/" className="login__signup-text">
-            Back to front page
-          </Link>
-        </div>
-      </div>
-      {/* </CSSTransition> */}
+          </LoginFormContainer>
+
+          <LoginSignupText>
+            {"New to Crumbs? "}
+            <Link to="/signup" className="login__signup-text">
+              {"Join Now! "}
+            </Link>
+            {"Back to "}
+            <Link to="/" className="login__signup-text">
+              Front Page
+            </Link>
+          </LoginSignupText>
+        </LogInContainer>
+      </MainWrapper>
     </>
   );
 }
 
 export default LogIn;
+
+const MainWrapper = styled.div`
+  margin: 0 auto;
+  width: 64rem;
+  height: 60rem;
+  background-image: url(${backgroundImg});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LogInContainer = styled.div`
+  width: 26rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 0.5rem;
+  padding: 2rem 1rem;
+`;
+
+const LoginHeader = styled.h1`
+  margin-bottom: 2rem;
+`;
+
+const LoginFormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const LoginFormLabel = styled.label`
+  margin-bottom: 0.25rem;
+  @include dt-bdy-copy-style;
+`;
+
+const InputField = styled.input`
+  width: 24rem;
+  padding: 0.4rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  margin-bottom: 0.5rem;
+`;
+
+const LoginSignupText = styled.div`
+  margin-top: 1rem;
+`;
