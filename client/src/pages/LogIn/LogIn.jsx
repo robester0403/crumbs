@@ -104,7 +104,6 @@ const MainWrapper = styled.div`
 
 const LogInContainer = styled.div`
   width: 26rem;
-  height: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;

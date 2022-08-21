@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo-transparent.png";
 import frontpageimage1 from "../../assets/images/frontpageimage1.JPG";
 import youtubefrontimage from "../../assets/images/youtubefrontimage.JPG";
+import styled from "styled-components";
 
 const FrontPage = () => {
   return (
     <>
       <div className="front__bg-image">
         <main className="front__wrap">
-          <section className="front-aside__wrap">
+          <FrontLeftWrapper>
             <article>
               <h1 className="front-aside__title">
                 Follow the CrumbTrails left by your influencers
@@ -30,7 +31,7 @@ const FrontPage = () => {
                 </Link>
               </div>
             </article>
-          </section>
+          </FrontLeftWrapper>
           <section className="front-phone__wrap">
             <div className="front-phone__screen-bg">
               <img
@@ -69,3 +70,20 @@ const FrontPage = () => {
 };
 
 export default FrontPage;
+
+const FrontLeftWrapper = styled.aside`
+  display: none;
+
+  @media (min-width: 48rem) {
+    display: inherit;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 0.5rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 22rem;
+    margin: auto 5rem;
+  }
+`;
