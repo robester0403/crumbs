@@ -1,4 +1,3 @@
-import "./FrontPage.scss";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo-transparent.png";
 import frontpageimage1 from "../../assets/images/frontpageimage1.JPG";
