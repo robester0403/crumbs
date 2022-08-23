@@ -6,7 +6,6 @@ const Marker = require("../models/marker");
 const getAllInstances = async (req, res, next) => {
   let allInstances;
   try {
-    // check why we need the option in documentation
     allInstances = await Instance.find({});
   } catch (err) {
     const error = new HttpError(
@@ -25,7 +24,6 @@ const getAllInstances = async (req, res, next) => {
 const getAllMapMarkers = async (req, res, next) => {
   let allMarkers;
   try {
-    // check why we need the option in documentation
     allMarkers = await Marker.find({});
   } catch (err) {
     return next(
@@ -37,7 +35,6 @@ const getAllMapMarkers = async (req, res, next) => {
   });
 };
 
-// or we search something like this req.userData.userId. I can send something back through the body right?
 const getBizIdInstances = async (req, res, next) => {
   const bizId = req.params.bizId;
 

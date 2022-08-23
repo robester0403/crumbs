@@ -29,17 +29,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(morgan("combined"));
 
-// import routes
+// import routes here
 app.use("/api/instancemap", instanceMapRoutes);
 app.use("/api/users", usersRoutes);
-
-// Step 1:
-// Step 2:
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.resolve(__dirname, "client", "build")));
