@@ -1,0 +1,24 @@
+// Primary color scheme
+$main-light-grey: #fafafa;
+$main-medium-grey: #f0f0f0;
+$main-light-black: #2f2f2f;
+$main-light-tan: #efe9e2;
+$main-light-blue: #a2ded0;
+$main-blue: #156ae3;
+$main-medium-blue: #0e5c8c;
+$main-dark-blue: #0d4c8b;
+$main-red: #ff4444;
+$main-black: #000000;
+
+:export {
+  mainLightGrey: $main-light-grey;
+  mainMediumGrey: $main-medium-grey;
+  mainLightBlack: $main-light-black;
+  mainLightTan: $main-light-tan;
+  mainLightBlue: $main-light-blue;
+  mainBlue: $main-blue;
+  mainMediumBlue: $main-medium-blue;
+  mainDarkBlue: $main-dark-blue;
+  mainRed: $main-red;
+  mainBlack: $main-black;
+}
