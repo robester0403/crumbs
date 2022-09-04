@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config/config";
 import backgroundImg from "../../assets/images/loginsignup.png";
 import styled from "styled-components";
+import { Button } from "@mui/material";
 
 const SignUp = () => {
   let navigate = useNavigate();
@@ -36,9 +37,14 @@ const SignUp = () => {
             />
             <FormLabel htmlFor="password">Password</FormLabel>
             <FormInput type="password" name="password" placeholder="" />
-            <button type="submit" className="signup__btn">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ margin: "0 auto;" }}
+            >
               Sign Up!
-            </button>
+            </Button>
           </SignupForm>
           <Link to="/login" className="signup__signup-text">
             Already an Influencer? Log in here instead

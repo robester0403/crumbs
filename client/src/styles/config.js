@@ -1,5 +1,19 @@
 import { createTheme } from "@mui/material/styles";
-import themecolors from "./partials/themecolors.scss";
+// we will need to setup webpack.config.js to do this later
+// import themecolors from "./partials/themecolors.scss";
+
+const themecolors = {
+  mainLightGrey: "#fafafa",
+  mainMediumGrey: "#f0f0f0",
+  mainLightBlack: "#2f2f2f",
+  mainLightTan: "#efe9e2",
+  mainLightBlue: "#a2ded0",
+  mainBlue: "#156ae3",
+  mainMediumBlue: "#0e5c8c",
+  mainDarkBlue: " #0d4c8b",
+  mainRed: "#ff4444",
+  mainBlack: "#000000",
+};
 
 const breakpoints = {
   values: {
@@ -15,7 +29,7 @@ const typography = {
   fontFamily: "Roboto, sans-serif",
 };
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: themecolors.mainBlack,
