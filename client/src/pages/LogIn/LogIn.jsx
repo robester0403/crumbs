@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { API_URL } from "../../config/config";
 import styled from "styled-components";
 import backgroundImg from "../../assets/images/loginsignup.png";
+import { Button } from "@mui/material";
 
 function LogIn() {
   const navigate = useNavigate();
@@ -66,9 +67,14 @@ function LogIn() {
               className="login__input"
             />
             <ErrorMessage>{errors.password?.message}</ErrorMessage>
-            <button type="submit" className="login__btn">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ margin: "0 auto;" }}
+            >
               Log In
-            </button>
+            </Button>
           </LoginFormContainer>
 
           <LoginSignupText>

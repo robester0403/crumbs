@@ -147,6 +147,8 @@ display: none;
   margin: 1rem 1rem;
   box-shadow: 2px 2px #888888;
   cursor: pointer;
+  background-color: #000000;
+  color: #fafafa;
   `;
 
 const PhoneWrap = styled.section`
@@ -221,6 +223,8 @@ const PhoneButton = styled.button`
   margin: 1rem 1rem;
   box-shadow: 2px 2px #888888;
   cursor: pointer;
+  background-color: #000000;
+  color: #fafafa;
 
   @media (min-width: 48rem) {
     display: none;

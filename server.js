@@ -8,7 +8,6 @@ const instanceMapRoutes = require("./routes/instance-map-routes");
 const usersRoutes = require("./routes/users-routes");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-
 const app = express();
 
 require("dotenv").config();
@@ -24,10 +23,12 @@ mongoose
   });
 
 app.use(cors({ credentials: true, origin: true }));
-app.use(logger("combined"));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("combined"));
+
+// Bodyparser middleware
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, "public")));

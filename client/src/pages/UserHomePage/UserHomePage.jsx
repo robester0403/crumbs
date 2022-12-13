@@ -2,7 +2,7 @@ import "./UserHomePage.scss";
 import Header from "../../components/Header/Header";
 import MapInstanceCards from "../../components/MapInstanceCards/MapInstanceCards";
 import React, { useState, useEffect } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, { Marker, Popup, NavigationControl } from "react-map-gl";
 import mapmarker from "../../assets/images/food-icon.png";
 import axios from "axios";
 import { API_URL } from "../../config/config";
@@ -24,6 +24,17 @@ export default function UserHomePage() {
     zoom: 10.5,
   });
 
+  // useEffect to get the current view location
+  // const getUserLocation = () =>{
+  //   ...
+  //   return getUserLocation;
+  // }
+  // useEffect(()=> {
+  //   getUserLocation()
+  // }, [])
+
+  console.log(markerArr);
+  console.log(instancesArr);
   const onLoadMarker = () => {
     // redo this link
     axios
@@ -58,6 +69,11 @@ export default function UserHomePage() {
     onLoadInstance();
   }, []);
 
+  //need an onchange to set viewport
+  // needs a token
+  // pass in all viewport info
+  // pass in the style from mapbox
+
   return (
     <>
       <div className="userHomePage__wrap">
@@ -79,8 +95,8 @@ export default function UserHomePage() {
                       key={marker.id}
                       latitude={parseFloat(marker.latitude.$numberDecimal)}
                       longitude={parseFloat(marker.longitude.$numberDecimal)}
-                      offsetTop={-viewport.zoom * 5}
-                      offsetLeft={-viewport.zoom * 2.6}
+                      offsetTop={-viewport.zoom * 5.5}
+                      offsetLeft={-viewport.zoom * 2.8}
                     >
                       <button
                         className="marker-btn"
@@ -132,7 +148,6 @@ export default function UserHomePage() {
                           target="_blank"
                           rel="noreferrer"
                         >
-                          {" "}
                           Website Link
                         </a>
                       </div>

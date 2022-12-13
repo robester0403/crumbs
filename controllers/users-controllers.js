@@ -114,7 +114,7 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res
+  return res
     .status(201)
     .json({ userId: createdUser.id, email: createdUser.email, token: token });
 };
@@ -177,7 +177,7 @@ const login = async (req, res, next) => {
     return next(error);
   }
   // Here is the crown jewel where the token is handed over
-  res.status(200).json({
+  return res.status(200).json({
     userId: existingUser.id,
     email: existingUser.email,
     token: token,
@@ -202,7 +202,7 @@ const influencerDBGetOwnInstances = async (req, res, next) => {
     );
   }
 
-  res.json({
+  return res.json({
     instances: ownInstances.map((instance) =>
       instance.toObject({ getters: true })
     ),
@@ -317,7 +317,7 @@ const influencerDBAddMarkerInstance = async (req, res, next) => {
     return next(error);
   }
   // this is just a object we send back to the front as confirmation. Don't know if we need it.
-  res.status(201).json({ instance: createdInstance });
+  return res.status(201).json({ instance: createdInstance });
 };
 
 const influencerSearchYelp = async (req, res, next) => {
@@ -376,8 +376,9 @@ const influencerDBGetProfile = async (req, res, next) => {
     );
   }
 
-  res.json({ profileData: profileData.toObject({ getters: true }) });
+  return res.json({ profileData: profileData.toObject({ getters: true }) });
 };
+
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
