@@ -73,7 +73,7 @@ token
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWFiYWJhZDJlZDY1YjM3OGMxNDYyMTMiLCJlbWFpbCI6InNhcmFoY2hhbkBnbWFpbC5jb20iLCJpYXQiOjE2Mzg2ODA2OTEsImV4cCI6MTYzODY4NDI5MX0.S_SF2riR_AnxsqBn_N3-Qz0bbSjwl7PyL_OQOGb9u4o
 
 const influencerDBGetOwnInstances = async (req, res, next) => {
-  const influencerId = req.params.userId;
+  const influencerId = req..userId;
   console.log(influencerId)
   let ownInstances;
   try {
